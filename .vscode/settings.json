@@ -1,0 +1,18 @@
+{
+  // Use the flake devshell's tinymist (built against typst 0.15) instead of
+  // the binary bundled with the extension. Resolved from PATH, which the
+  // direnv extension populates from .envrc → nix develop.
+  "tinymist.serverPath": "tinymist",
+  // Diagnose against the bundle export target instead of paged (PDF) layout.
+  "tinymist.exportTarget": "bundle",
+  // Same compiler setup as the flake apps: experimental features on,
+  // system fonts off (fonts come from TYPST_FONT_PATHS via the devshell),
+  // and src/main.typ as the entry file so pages/lib get whole-site
+  // diagnostics instead of being compiled standalone.
+  "tinymist.typstExtraArgs": [
+    "--features=html,bundle",
+    "--ignore-system-fonts",
+    "src/main.typ"
+  ],
+  "nixEnvSelector.suggestion": false
+}

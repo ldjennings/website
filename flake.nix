@@ -34,6 +34,15 @@
         src = siteSrc;
         file = "main.typ";
 
+        # Fonts the documents use, pinned through nix. press wraps typst with
+        # TYPST_FONT_PATHS pointing at these, so the sandbox build, the
+        # devshell, and the nix apps below all resolve identical fonts —
+        # whether or not they exist on the host system.
+        fonts = [
+          pkgs.libertinus # typst's default text face
+          pkgs.junicode # used by the PDF documents
+        ];
+
         creationTimestamp = self.lastModified;
         format = "bundle";
 
@@ -48,6 +57,21 @@
           runHook postBuild
         '';
       };
+
+      # Dev-loop commands as nix apps, using the same wrapped typst (pinned
+      # fonts + packages) as the sandbox build. --ignore-system-fonts keeps
+      # local compiles from resolving fonts the sandbox won't have.
+      # Run from the repo root: they read src/ and write build/.
+      mkSiteApp =
+        name: verb:
+        pkgs.writeShellApplication {
+          name = "site-${name}";
+          runtimeInputs = [ site.typst-wrapped ];
+          text = ''
+            exec typst ${verb} --features html,bundle --format bundle \
+              --ignore-system-fonts src/main.typ build/
+          '';
+        };
     in
     {
       # `nix build` produces result/ with the compiled site.
@@ -55,6 +79,18 @@
 
       # `nix flake check` builds the site.
       checks.${system}.site-builds = site;
+
+      # `nix run .#watch` / `nix run .#build` — replicable dev loop.
+      apps.${system} = {
+        watch = {
+          type = "app";
+          program = pkgs.lib.getExe (mkSiteApp "watch" "watch");
+        };
+        build = {
+          type = "app";
+          program = pkgs.lib.getExe (mkSiteApp "build" "compile");
+        };
+      };
 
       devShells.${system}.default = pkgs.mkShellNoCC {
         # Brings the wrapped typst (with feature flags available) from the site build.

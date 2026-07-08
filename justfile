@@ -1,16 +1,15 @@
-# Bundle export is experimental in typst 0.15 and gated behind feature flags.
-typst-args := "--features html,bundle --format bundle"
 out := "build"
 
 default: watch
 
 # Recompile into build/ on every source change.
+# Runs through the flake so typst, feature flags, and fonts are all pinned.
 watch:
-    typst watch {{typst-args}} src/main.typ {{out}}/
+    nix run .#watch
 
 # One-shot compile into build/.
 build:
-    typst compile {{typst-args}} src/main.typ {{out}}/
+    nix run .#build
 
 # Serve build/ locally (live view at http://localhost:8000).
 serve port="8000":
