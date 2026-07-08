@@ -14,5 +14,10 @@
     "--ignore-system-fonts",
     "src/main.typ"
   ],
+  // Resolve fonts from the flake's pinned font env via the stable symlink
+  // the devshell maintains (see shellHook in flake.nix). Works even when
+  // the editor process lacks the devshell's TYPST_FONT_PATHS.
+  "tinymist.systemFonts": false,
+  "tinymist.fontPaths": ["${workspaceFolder}/.direnv/site-fonts"],
   "nixEnvSelector.suggestion": false
 }

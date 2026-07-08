@@ -100,6 +100,16 @@
           python3
           just
         ];
+
+        # Stable, workspace-relative handle on the pinned font env (press's
+        # inherited shellHook has already exported TYPST_FONT_PATHS by the
+        # time this runs). tinymist.fontPaths in .vscode/settings.json points
+        # here, so editor diagnostics resolve the same fonts as the builds
+        # even when the editor wasn't launched from the devshell.
+        shellHook = ''
+          mkdir -p .direnv
+          ln -sfn "''${TYPST_FONT_PATHS%%:*}" .direnv/site-fonts
+        '';
       };
     };
 }
