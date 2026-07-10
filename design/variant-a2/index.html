@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>liam jennings</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <a class="brand" href="#">
+    <span class="logo">
+      <span class="logo-square logo-rose"></span>
+      <span class="logo-square logo-teal"></span>
+    </span>
+    <span class="brand-name">liam jennings</span>
+  </a>
+  <nav class="site-nav">
+    <ul class="nav-main">
+      <li><a href="#">Home</a></li>
+      <li><a href="#writing">Blog</a></li>
+    </ul>
+    <div class="nav-group">
+      <p class="nav-group-title">projects</p>
+      <ul>
+        <li><a href="#projects">all projects</a></li>
+        <li><a href="#">this website</a></li>
+        <li><a href="#">dotfiles</a></li>
+        <li><a href="#">weekend raytracer</a></li>
+      </ul>
+    </div>
+    <div class="nav-group">
+      <p class="nav-group-title">elsewhere</p>
+      <ul>
+        <li><a href="https://github.com/ldjennings">github</a></li>
+        <li><a href="mailto:jenningsliamd@gmail.com">email</a></li>
+      </ul>
+    </div>
+  </nav>
+</aside>
+
+<div class="page">
+  <header class="mobile-header">
+    <a class="brand" href="#">
+      <span class="logo">
+        <span class="logo-square logo-rose"></span>
+        <span class="logo-square logo-teal"></span>
+      </span>
+      <span class="brand-name">liam jennings</span>
+    </a>
+    <details>
+      <summary>menu</summary>
+      <nav class="site-nav">
+        <ul class="nav-main">
+          <li><a href="#">Home</a></li>
+          <li><a href="#writing">Blog</a></li>
+        </ul>
+      </nav>
+    </details>
+  </header>
+
+  <main>
+    <p class="intro">Hi, I'm Liam. I build tools — mostly around Nix and
+    Typst — and I write about how they work. Everything below has source
+    you can read.</p>
+
+    <section id="projects">
+      <h2>projects</h2>
+      <div class="project-grid">
+
+        <article class="project">
+          <div class="thumb thumb-web"></div>
+          <div class="card-body">
+            <h3><a href="#">this website</a></h3>
+            <p>Typst's experimental bundle export compiling HTML pages and
+            a PDF from one source tree.</p>
+            <ul class="tags"><li>typst</li><li>web</li><li>nix</li></ul>
+            <details class="more">
+              <summary>details</summary>
+              <div class="blurb">
+                <p class="badges"><span class="badge open">open source</span></p>
+                <p>One compiler produces the whole site: HTML pages, shared
+                assets, and a print-ready PDF twin of the blog, with
+                cross-document links resolved at build time. Fonts and the
+                toolchain are pinned through a Nix flake, so every build is
+                identical everywhere.</p>
+                <p class="blurb-links"><a href="#">source ↗</a> <a href="#">live site ↗</a></p>
+              </div>
+            </details>
+          </div>
+          <a class="card-link" href="#" aria-hidden="true" tabindex="-1"></a>
+          <div class="preview" aria-hidden="true">
+            <div class="preview-thumb thumb-web"></div>
+            <div class="preview-body">
+              <h3>this website</h3>
+              <p class="badges"><span class="badge open">open source</span></p>
+              <p>One compiler produces the whole site: HTML pages, shared
+              assets, and a print-ready PDF twin of the blog, with
+              cross-document links resolved at build time. Fonts and the
+              toolchain are pinned through a Nix flake, so every build is
+              identical everywhere.</p>
+              <p class="blurb-links"><a href="#">source ↗</a> <a href="#">live site ↗</a></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="thumb thumb-dots"></div>
+          <div class="card-body">
+            <h3><a href="#">dotfiles</a></h3>
+            <p>A fully declarative NixOS + Home Manager configuration: one
+            command from bare metal to a working desktop.</p>
+            <ul class="tags"><li>nix</li><li>linux</li></ul>
+            <details class="more">
+              <summary>details</summary>
+              <div class="blurb">
+                <p class="badges"><span class="badge open">open source</span></p>
+                <p>Every machine I own boots from the same flake: window
+                manager, editor, secrets, and services all described in one
+                tree. Reinstalling is a non-event, and experiments roll back
+                with a single generation switch.</p>
+                <p class="blurb-links"><a href="#">source ↗</a></p>
+              </div>
+            </details>
+          </div>
+          <a class="card-link" href="#" aria-hidden="true" tabindex="-1"></a>
+          <div class="preview" aria-hidden="true">
+            <div class="preview-thumb thumb-dots"></div>
+            <div class="preview-body">
+              <h3>dotfiles</h3>
+              <p class="badges"><span class="badge open">open source</span></p>
+              <p>Every machine I own boots from the same flake: window
+              manager, editor, secrets, and services all described in one
+              tree. Reinstalling is a non-event, and experiments roll back
+              with a single generation switch.</p>
+              <p class="blurb-links"><a href="#">source ↗</a></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="thumb thumb-ray"></div>
+          <div class="card-body">
+            <h3><a href="#">weekend raytracer</a></h3>
+            <p>A path tracer in Rust with BVH acceleration and a tiny scene
+            description language.</p>
+            <ul class="tags"><li>rust</li><li>graphics</li></ul>
+            <details class="more">
+              <summary>details</summary>
+              <div class="blurb">
+                <p class="badges"><span class="badge open">open source</span></p>
+                <p>Started as the classic weekend book, then kept going:
+                bounding-volume hierarchies, importance sampling, and a
+                small text format for describing scenes. Renders the
+                obligatory glass spheres, but also my apartment.</p>
+                <p class="blurb-links"><a href="#">source ↗</a> <a href="#">gallery ↗</a></p>
+              </div>
+            </details>
+          </div>
+          <a class="card-link" href="#" aria-hidden="true" tabindex="-1"></a>
+          <div class="preview" aria-hidden="true">
+            <div class="preview-thumb thumb-ray"></div>
+            <div class="preview-body">
+              <h3>weekend raytracer</h3>
+              <p class="badges"><span class="badge open">open source</span></p>
+              <p>Started as the classic weekend book, then kept going:
+              bounding-volume hierarchies, importance sampling, and a small
+              text format for describing scenes. Renders the obligatory
+              glass spheres, but also my apartment.</p>
+              <p class="blurb-links"><a href="#">source ↗</a> <a href="#">gallery ↗</a></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="thumb thumb-chip"></div>
+          <div class="card-body">
+            <h3><a href="#">chip-8 emulator</a></h3>
+            <p>A CHIP-8 interpreter in C with a curses front-end and a
+            single-step debugger.</p>
+            <ul class="tags"><li>c</li><li>emulation</li></ul>
+            <details class="more">
+              <summary>details</summary>
+              <div class="blurb">
+                <p class="badges"><span class="badge open">open source</span></p>
+                <p>A complete interpreter for the 1970s virtual machine,
+                playable in a terminal. The single-step debugger shows
+                registers, the stack, and disassembly live — written to
+                understand how emulation actually works before attempting
+                anything bigger.</p>
+                <p class="blurb-links"><a href="#">source ↗</a></p>
+              </div>
+            </details>
+          </div>
+          <a class="card-link" href="#" aria-hidden="true" tabindex="-1"></a>
+          <div class="preview" aria-hidden="true">
+            <div class="preview-thumb thumb-chip"></div>
+            <div class="preview-body">
+              <h3>chip-8 emulator</h3>
+              <p class="badges"><span class="badge open">open source</span></p>
+              <p>A complete interpreter for the 1970s virtual machine,
+              playable in a terminal. The single-step debugger shows
+              registers, the stack, and disassembly live — written to
+              understand how emulation actually works before attempting
+              anything bigger.</p>
+              <p class="blurb-links"><a href="#">source ↗</a></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="thumb thumb-notes"></div>
+          <div class="card-body">
+            <h3><a href="#">course notes pipeline</a></h3>
+            <p>Lecture notes typeset in Typst, compiled to PDF and HTML by
+            CI on every push.</p>
+            <ul class="tags"><li>typst</li><li>ci</li></ul>
+            <details class="more">
+              <summary>details</summary>
+              <div class="blurb">
+                <p class="badges"><span class="badge study">coursework</span></p>
+                <p>Notes get written once in Typst and published twice:
+                a paged PDF for printing and margin scribbles, and HTML for
+                quick reference. CI rebuilds both on every push, so the
+                published copy never lags the source.</p>
+                <p class="blurb-links"><a href="#">source ↗</a> <a href="#">notes ↗</a></p>
+              </div>
+            </details>
+          </div>
+          <a class="card-link" href="#" aria-hidden="true" tabindex="-1"></a>
+          <div class="preview" aria-hidden="true">
+            <div class="preview-thumb thumb-notes"></div>
+            <div class="preview-body">
+              <h3>course notes pipeline</h3>
+              <p class="badges"><span class="badge study">coursework</span></p>
+              <p>Notes get written once in Typst and published twice: a
+              paged PDF for printing and margin scribbles, and HTML for
+              quick reference. CI rebuilds both on every push, so the
+              published copy never lags the source.</p>
+              <p class="blurb-links"><a href="#">source ↗</a> <a href="#">notes ↗</a></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="thumb thumb-lab"></div>
+          <div class="card-body">
+            <h3><a href="#">homelab</a></h3>
+            <p>Self-hosted services on a single NixOS box: reverse proxy,
+            backups, and monitoring, all in one flake.</p>
+            <ul class="tags"><li>nix</li><li>self-hosting</li></ul>
+            <details class="more">
+              <summary>details</summary>
+              <div class="blurb">
+                <p class="badges"><span class="badge lab">self-hosted</span></p>
+                <p>One machine, one flake: media, git mirrors, and backups
+                behind a reverse proxy with automatic certificates.
+                Monitoring pages me before anything user-visible breaks —
+                in theory.</p>
+                <p class="blurb-links"><a href="#">source ↗</a></p>
+              </div>
+            </details>
+          </div>
+          <a class="card-link" href="#" aria-hidden="true" tabindex="-1"></a>
+          <div class="preview" aria-hidden="true">
+            <div class="preview-thumb thumb-lab"></div>
+            <div class="preview-body">
+              <h3>homelab</h3>
+              <p class="badges"><span class="badge lab">self-hosted</span></p>
+              <p>One machine, one flake: media, git mirrors, and backups
+              behind a reverse proxy with automatic certificates.
+              Monitoring pages me before anything user-visible breaks — in
+              theory.</p>
+              <p class="blurb-links"><a href="#">source ↗</a></p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="writing">
+      <h2>writing</h2>
+      <ul class="article-list">
+        <li>
+          <a href="#">Building a website with Typst's bundle export</a>
+          <p>What the experimental HTML bundle can and can't do yet, and how
+          this site uses it.</p>
+          <time datetime="2026-07-02">2026-07-02</time>
+        </li>
+        <li>
+          <a href="#">Pinning fonts with Nix so builds never lie</a>
+          <p>Making the compiler, the editor, and CI all see exactly the
+          same fonts.</p>
+          <time datetime="2026-06-18">2026-06-18</time>
+        </li>
+        <li>
+          <a href="#">What I learned writing a path tracer</a>
+          <p>Sampling, BVHs, and the bugs that only show up after ten
+          thousand rays.</p>
+          <time datetime="2026-05-30">2026-05-30</time>
+        </li>
+        <li>
+          <a href="#">Reproducible dev shells, minus the headaches</a>
+          <p>A tour of the flake patterns I actually reuse between
+          projects.</p>
+          <time datetime="2026-04-21">2026-04-21</time>
+        </li>
+      </ul>
+    </section>
+  </main>
+</div>
+
+</body>
+</html>

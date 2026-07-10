@@ -1,0 +1,553 @@
+/* Variant A2 — variant A's sidebar and Rosé Pine Dawn palette, with two
+   additions that distinguish it from youwen.dev:
+   1. a thumbnail band on each project card (gradient stand-ins for
+      screenshots, toned to the palette so the grid stays quiet), and
+   2. a hover-deployed preview per card: hovering deploys an overlay with a
+      bigger image, badge, full description, and links. Pure CSS (:hover),
+      no JavaScript, so it survives the static Typst export. Touch devices
+      (no hover) get a click-to-expand <details> fallback instead. */
+
+:root {
+  --bg: #faf4ed;
+  --surface: #fffaf3;
+  --overlay: #f2e9e1;
+  --text: #575279;
+  --subtle: #797593;
+  --muted: #9893a5;
+  --love: #b4637a;
+  --gold: #ea9d34;
+  --rose: #d7827e;
+  --pine: #286983;
+  --foam: #56949f;
+  --iris: #907aa9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.625;
+  max-width: 1440px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+  display: flex;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  body {
+    margin-top: 5rem;
+    padding: 0 1.5rem;
+  }
+}
+
+/* ---- Layout columns ---- */
+
+/* Sticks to the viewport while the page scrolls. align-self keeps the
+   sidebar its natural height (flex would otherwise stretch it to match the
+   page column, leaving sticky nothing to do). */
+.sidebar {
+  width: 16rem;
+  flex: none;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.page {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---- Brand (logo + name) ---- */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand:hover {
+  background: var(--surface);
+}
+
+.brand-name {
+  font-style: italic;
+  font-size: 2.1rem;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.logo {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  flex: none;
+}
+
+.logo-square {
+  position: absolute;
+  top: 12px;
+  width: 26px;
+  height: 26px;
+  transform: rotate(45deg);
+}
+
+.logo-rose {
+  left: 3px;
+  background: var(--love);
+}
+
+.logo-teal {
+  left: 21px;
+  background: var(--foam);
+}
+
+/* ---- Nav ---- */
+
+.site-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.site-nav a {
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+.site-nav a:hover {
+  background: var(--surface);
+}
+
+.nav-main {
+  font-size: 1.5rem;
+}
+
+.nav-main a {
+  color: var(--love);
+}
+
+.nav-group-title {
+  font-variant-caps: all-small-caps;
+  font-size: 1.15rem;
+  margin: 0 0 0.25rem;
+}
+
+.nav-group a {
+  color: var(--subtle);
+}
+
+/* ---- Mobile header (hidden on desktop) ---- */
+
+.mobile-header {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    display: block;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .mobile-header {
+    display: block;
+    border-bottom: 1px dashed var(--muted);
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+  }
+
+  .mobile-header summary {
+    font-variant-caps: all-small-caps;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+
+  .mobile-header nav {
+    text-align: left;
+    margin-top: 0.75rem;
+  }
+}
+
+/* ---- Content ---- */
+
+main a {
+  color: var(--foam);
+}
+
+main a:focus-visible,
+.site-nav a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--iris);
+  outline-offset: 2px;
+}
+
+.intro {
+  font-size: 1.15rem;
+  max-width: 38rem;
+  margin-top: 0.5rem;
+}
+
+/* Section headings pick up the logo's rotated square. */
+h2 {
+  font-variant-caps: all-small-caps;
+  font-weight: normal;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: var(--subtle);
+  margin: 3rem 0 1rem;
+}
+
+h2::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 0.6rem;
+  transform: rotate(45deg);
+  background: var(--love);
+  vertical-align: 2px;
+}
+
+#writing h2::before {
+  background: var(--foam);
+}
+
+/* ---- Project cards ---- */
+
+/* Default stretch alignment keeps cards in a row exactly the same height;
+   the flex column inside pins tags/details to the card bottom. */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* No overflow:hidden here — the hover preview must extend past the card.
+   The thumbnail rounds its own top corners instead. */
+.project {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--overlay);
+  border-radius: 6px;
+  transition: box-shadow 0.15s;
+}
+
+.project:hover {
+  box-shadow: 0 2px 10px rgba(87, 82, 121, 0.08);
+}
+
+/* Thumbnail band: fixed ratio keeps the grid neat regardless of image.
+   Gradients stand in for real screenshots, toned to the palette. */
+.thumb {
+  aspect-ratio: 3 / 1;
+  border-bottom: 1px solid var(--overlay);
+  border-radius: 5px 5px 0 0;
+}
+
+.thumb-web   { background: linear-gradient(115deg, #286983, #56949f 65%, #9ccfd8); }
+.thumb-dots  { background: linear-gradient(115deg, #575279, #907aa9 65%, #c4b7d9); }
+.thumb-ray   { background: linear-gradient(115deg, #b4637a, #d7827e 60%, #f0c6a4); }
+.thumb-chip  { background: linear-gradient(115deg, #3e5f56, #569f7e 65%, #b3d6c2); }
+.thumb-notes { background: linear-gradient(115deg, #855c1f, #ea9d34 65%, #f5d1a0); }
+.thumb-lab   { background: linear-gradient(115deg, #45415e, #797593 65%, #c5c1d6); }
+
+.card-body {
+  padding: 1rem 1.25rem 0.9rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.project h3 a {
+  color: var(--pine);
+  text-decoration: none;
+}
+
+.project h3 a:hover {
+  text-decoration: underline;
+}
+
+.card-body > p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.tags {
+  list-style: none;
+  margin: auto 0 0;
+  padding: 0.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.tags li::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 0.35rem;
+  transform: rotate(45deg);
+  background: var(--gold);
+  vertical-align: 1px;
+}
+
+.tags li:nth-child(2)::before {
+  background: var(--foam);
+}
+
+.tags li:nth-child(3)::before {
+  background: var(--iris);
+}
+
+/* ---- Whole-card link ---- */
+
+/* Covers the card (m4xc-style); real links sit above it via z-index. */
+.project {
+  position: relative;
+}
+
+.card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 6px;
+}
+
+.card-body h3 a,
+details.more,
+.blurb-links a {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---- Hover-deployed preview (CSS-only, no JS) ---- */
+
+.preview {
+  position: absolute;
+  top: -0.75rem;
+  left: -0.75rem;
+  right: -0.75rem;
+  z-index: 5;
+  background: var(--surface);
+  border: 1px solid var(--overlay);
+  border-radius: 8px;
+  box-shadow: 0 14px 36px rgba(87, 82, 121, 0.22);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0s linear 0.2s;
+}
+
+/* Small delay so grazing the grid with the cursor doesn't flash previews. */
+.project:hover .preview {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0.18s, 0.18s, 0.18s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview {
+    transition: none;
+  }
+}
+
+.preview-thumb {
+  aspect-ratio: 2 / 1;
+  border-bottom: 1px solid var(--overlay);
+}
+
+.preview-body {
+  padding: 1rem 1.25rem 1.1rem;
+}
+
+.preview-body h3 {
+  margin: 0;
+}
+
+.preview-body p {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+}
+
+/* Hover devices get the preview; touch devices get the <details> fallback. */
+@media (hover: hover) {
+  details.more {
+    display: none;
+  }
+}
+
+@media (hover: none) {
+  .preview {
+    display: none;
+  }
+}
+
+/* ---- Click-to-expand blurb (touch fallback) ---- */
+
+details.more {
+  margin-top: 0.75rem;
+  border-top: 1px dashed var(--overlay);
+  interpolate-size: allow-keywords;
+}
+
+details.more summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.4rem 0 0.3rem;
+  font-variant-caps: all-small-caps;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--subtle);
+}
+
+details.more summary::-webkit-details-marker {
+  display: none;
+}
+
+details.more summary::after {
+  content: " ▾";
+  color: var(--muted);
+}
+
+details.more[open] summary::after {
+  content: " ▴";
+}
+
+details.more summary:hover {
+  color: var(--love);
+}
+
+/* Slide animation where supported (interpolate-size + ::details-content);
+   elsewhere the blurb simply appears. */
+details.more::details-content {
+  block-size: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: block-size 0.3s ease, opacity 0.3s ease, content-visibility 0.3s allow-discrete;
+}
+
+details.more[open]::details-content {
+  block-size: auto;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details.more::details-content {
+    transition: none;
+  }
+}
+
+.blurb {
+  padding-bottom: 0.5rem;
+}
+
+.blurb p {
+  margin: 0.5rem 0 0;
+  font-size: 0.92rem;
+}
+
+.badges {
+  margin: 0.4rem 0 0;
+}
+
+.badge {
+  display: inline-block;
+  font-family: ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid;
+}
+
+.badge.open  { color: var(--pine); border-color: var(--pine); background: rgba(40, 105, 131, 0.07); }
+.badge.study { color: var(--iris); border-color: var(--iris); background: rgba(144, 122, 169, 0.09); }
+.badge.lab   { color: var(--gold); border-color: var(--gold); background: rgba(234, 157, 52, 0.09); }
+
+.blurb-links a {
+  margin-right: 1rem;
+  font-size: 0.9rem;
+}
+
+/* ---- Article list ---- */
+
+.article-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 40rem;
+}
+
+.article-list li {
+  padding: 1rem 0;
+  border-bottom: 1px dashed var(--overlay);
+}
+
+.article-list a {
+  color: var(--love);
+  font-size: 1.15rem;
+  font-style: italic;
+  text-decoration: none;
+}
+
+.article-list a:hover {
+  text-decoration: underline;
+}
+
+.article-list p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.article-list time {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
