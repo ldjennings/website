@@ -7,7 +7,10 @@
       no JavaScript, so it survives the static Typst export. Touch devices
       (no hover) get a click-to-expand <details> fallback instead. */
 
+/* Rosé Pine Dawn (light) / Rosé Pine (dark) — same role names, so the whole
+   page swaps coherently on prefers-color-scheme. */
 :root {
+  color-scheme: light dark;
   --bg: #faf4ed;
   --surface: #fffaf3;
   --overlay: #f2e9e1;
@@ -20,6 +23,41 @@
   --pine: #286983;
   --foam: #56949f;
   --iris: #907aa9;
+  --shadow: rgba(87, 82, 121, 0.22);
+  --shadow-soft: rgba(87, 82, 121, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #191724;
+    --surface: #1f1d2e;
+    --overlay: #26233a;
+    --text: #e0def4;
+    --subtle: #908caa;
+    --muted: #6e6a86;
+    --love: #eb6f92;
+    --gold: #f6c177;
+    --rose: #ebbcba;
+    --pine: #31748f;
+    --foam: #9ccfd8;
+    --iris: #c4a7e7;
+    --shadow: rgba(0, 0, 0, 0.55);
+    --shadow-soft: rgba(0, 0, 0, 0.35);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+section {
+  scroll-margin-top: 2rem;
 }
 
 * {
@@ -266,7 +304,7 @@ h2::before {
 }
 
 .project:hover {
-  box-shadow: 0 2px 10px rgba(87, 82, 121, 0.08);
+  box-shadow: 0 2px 10px var(--shadow-soft);
 }
 
 /* Thumbnail band: fixed ratio keeps the grid neat regardless of image.
@@ -374,7 +412,7 @@ details.more,
   background: var(--surface);
   border: 1px solid var(--overlay);
   border-radius: 8px;
-  box-shadow: 0 14px 36px rgba(87, 82, 121, 0.22);
+  box-shadow: 0 14px 36px var(--shadow);
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
@@ -508,9 +546,9 @@ details.more[open]::details-content {
   border: 1px solid;
 }
 
-.badge.open  { color: var(--pine); border-color: var(--pine); background: rgba(40, 105, 131, 0.07); }
-.badge.study { color: var(--iris); border-color: var(--iris); background: rgba(144, 122, 169, 0.09); }
-.badge.lab   { color: var(--gold); border-color: var(--gold); background: rgba(234, 157, 52, 0.09); }
+.badge.open  { color: var(--pine); border-color: var(--pine); background: color-mix(in srgb, var(--pine) 8%, transparent); }
+.badge.study { color: var(--iris); border-color: var(--iris); background: color-mix(in srgb, var(--iris) 9%, transparent); }
+.badge.lab   { color: var(--gold); border-color: var(--gold); background: color-mix(in srgb, var(--gold) 9%, transparent); }
 
 .blurb-links a {
   margin-right: 1rem;
@@ -519,6 +557,9 @@ details.more[open]::details-content {
 
 /* ---- Article list ---- */
 
+/* Whole row is clickable (overlay link, like the cards) but stays a plain
+   list — no thumbnails or expansion, so articles read differently from
+   projects. Negative margin lets the hover wash extend past the text. */
 .article-list {
   list-style: none;
   margin: 0;
@@ -527,8 +568,28 @@ details.more[open]::details-content {
 }
 
 .article-list li {
-  padding: 1rem 0;
+  position: relative;
+  padding: 1rem;
+  margin: 0 -1rem;
   border-bottom: 1px dashed var(--overlay);
+  border-radius: 6px;
+  transition: background-color 0.15s;
+}
+
+.article-list li:hover {
+  background: var(--surface);
+}
+
+.row-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 6px;
+}
+
+.article-list li > a:not(.row-link) {
+  position: relative;
+  z-index: 2;
 }
 
 .article-list a {
@@ -550,4 +611,18 @@ details.more[open]::details-content {
 .article-list time {
   font-size: 0.85rem;
   color: var(--muted);
+}
+
+/* ---- Colophon ---- */
+
+.colophon {
+  margin-top: 4rem;
+  padding: 1.5rem 0 0.5rem;
+  border-top: 1px dashed var(--muted);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.colophon a {
+  color: var(--subtle);
 }
