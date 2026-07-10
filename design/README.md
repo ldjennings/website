@@ -46,6 +46,8 @@ gradient thumbnails, tinted screenshots, Rosé Pine / gruvbox / kanagawa.
 
 ## Open questions
 
+- Logo: the "lj" monogram tile is a placeholder (youwen-style rotated
+  squares removed); a real mark is still to be designed.
 - Real project content, links, and per-project screenshots.
 - Card click destination: project page vs GitHub repo.
 - Hover-preview trigger: whole card (current, 0.18s delay) vs title only.
