@@ -1,0 +1,50 @@
+/* The chosen theme: Everforest light/dark, shifted blue — everforest's warm
+   papers and softness, but with blue/aqua accents leading instead of green,
+   and a white (not tan) dark-mode foreground. Won out over Rosé Pine,
+   gruvbox, and kanagawa candidates.
+   Type: Alegreya display over Atkinson Hyperlegible body — bookish and
+   humanist, tuned for long-form readability. */
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..700;1,400..700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  color-scheme: light dark;
+  --font-display: "Alegreya", Georgia, serif;
+  --font-body: "Atkinson Hyperlegible", system-ui, sans-serif;
+
+  --bg: #fdf6e3;
+  --surface: #f4f0d9;
+  --overlay: #e6e2cc;
+  --text: #5c6a72;
+  --subtle: #708089;
+  --muted: #939f91;
+  --love: #3a94c5;
+  --gold: #dfa000;
+  --rose: #f57d26;
+  --pine: #2f6f8f;
+  --foam: #35a77c;
+  --iris: #df69ba;
+  --shadow: rgba(92, 106, 114, 0.22);
+  --shadow-soft: rgba(92, 106, 114, 0.09);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #2d353b;
+    --surface: #343f44;
+    --overlay: #3d484d;
+    /* Everforest's stock dark foreground is tan (#d3c6aa) — swapped for
+       white per feedback; the palette's softness stays in the accents. */
+    --text: #f1f3f4;
+    --subtle: #9da9a0;
+    --muted: #859289;
+    --love: #7fbbb3;
+    --gold: #dbbc7f;
+    --rose: #e69875;
+    --pine: #6fa5c8;
+    --foam: #83c092;
+    --iris: #d699b6;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --shadow-soft: rgba(0, 0, 0, 0.3);
+  }
+}
