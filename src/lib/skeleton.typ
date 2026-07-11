@@ -14,6 +14,11 @@
   // (also avoids its first-load background flash). Typst can only emit
   // into <body>, but Dark Reader's lock check is document-wide.
   html.meta(name: "darkreader-lock")
+  // Applied at parse time, before the stylesheets load — so the browser's
+  // pre-CSS canvas is already dark in dark mode instead of flashing white
+  // on every navigation. (theme.css declares color-scheme too, but that
+  // only kicks in after the CSS arrives.)
+  html.meta(name: "color-scheme", content: "light dark")
   // Tints the mobile browser toolbar to match the page background
   // (values mirror --bg in theme.css).
   html.meta(name: "theme-color", media: "(prefers-color-scheme: light)", content: "#fdf6e3")
