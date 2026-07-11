@@ -1,5 +1,13 @@
 #import "../lib/skeleton.typ": webpage
-#import "../lib/post.typ": post, fig, btn, post-nav
+#import "../lib/post.typ": post, post-pdf, fig, btn, post-nav
+
+// One metadata dict feeds the HTML page, its PDF twin, and both titles.
+#let meta = (
+  category: "robotics",
+  date: datetime(year: 2025, month: 5, day: 1),
+  tags: ("stm32", "can", "pcb"),
+  title: [WPI Formula Electric 2025 — Electronics & Software],
+)
 
 // Prose in native Typst markup so the same body feeds the HTML page and
 // its PDF twin below (fig() branches on export target).
@@ -80,16 +88,14 @@
     boards I made will be used and modified by future team members.]
 ]
 
-#webpage("formula-electric.html", title: [WPI Formula Electric 2025 — Liam Jennings])[
-  #post(
-    category: "robotics",
-    date: datetime(year: 2025, month: 5, day: 1),
-    tags: ("stm32", "can", "pcb"),
-    title: [WPI Formula Electric 2025 — Electronics & Software],
-  )[
+#webpage("formula-electric.html", title: meta.title)[
+  #post(..meta)[
     #body
 
-    #btn([Browse the source ↗], "https://github.com/ldjennings/driver-radio")
+    #btn(
+      ([Browse the source ↗], "https://github.com/ldjennings/driver-radio"),
+      ([Download as PDF ↓], "formula-electric.pdf"),
+    )
 
     #post-nav(
       prev: ([quadrotor interception], "https://jenningsliamd.me/robotics/2023/12/13/UAV-sim/"),
@@ -100,16 +106,6 @@
 
 // PDF twin of the write-up — plain #document, no HTML chrome, same body.
 // Fonts come from the flake's pinned set, matching the web faces.
-#document("formula-electric.pdf", title: [WPI Formula Electric 2025])[
-  #set text(font: "Atkinson Hyperlegible", size: 11pt)
-  #show heading: set text(font: "Alegreya", weight: 500)
-  #show raw: set text(font: "Atkinson Hyperlegible Mono")
-
-  #text(font: "Alegreya", size: 20pt, weight: 500)[
-    WPI Formula Electric 2025 — Electronics & Software
-  ]
-
-  robotics · 01 May 2025
-
-  #body
+#document("formula-electric.pdf", title: meta.title)[
+  #post-pdf(..meta, body)
 ]

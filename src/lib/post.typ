@@ -5,19 +5,25 @@
 
 // Captioned image. Branches on export target so the same post body can
 // feed both the HTML page and its PDF twin.
-#let fig(name, caption, alt: "") = context {
+#let fig(name, caption, alt: "", width: 75%) = context {
   if target() == "html" {
     html.figure({
       html.img(src: "img/" + name, alt: alt)
       html.figcaption(caption)
     })
   } else {
-    figure(image("../assets/img/" + name, width: 75%), caption: caption)
+    figure(image("../assets/img/" + name, width: width), caption: caption)
   }
 }
 
-// Bordered action button (source links, PDF downloads).
-#let btn(label, href) = html.p(html.a(class: "button", href: href, label))
+// Bordered action buttons (source links, PDF downloads); takes one or
+// more (label, href) pairs rendered side by side.
+#let btn(..pairs) = html.p({
+  for (label, href) in pairs.pos() {
+    html.a(class: "button", href: href, label)
+    [ ]
+  }
+})
 
 // Older/newer footer navigation. prev/next: (label, href) or none.
 #let post-nav(prev: none, next: none) = html.nav(class: "post-nav", {
@@ -60,3 +66,25 @@
     body
   }
 })
+
+// PDF-twin counterpart of post(): same metadata dict, paged styling that
+// echoes the web faces. Pages spread one `meta` into both.
+#let post-pdf(category: "", date: none, tags: (), title: [], body) = {
+  set text(font: "Atkinson Hyperlegible", size: 11pt)
+  show heading: set text(font: "Alegreya", weight: 500)
+  show raw: set text(font: "Atkinson Hyperlegible Mono")
+
+  text(font: "Alegreya", size: 20pt, weight: 500, title)
+
+  v(0.5em)
+  text(fill: luma(35%), {
+    category
+    [ · ]
+    date.display("[day] [month repr:long] [year]")
+    [ · ]
+    tags.join(" · ")
+  })
+  v(1em)
+
+  body
+}
