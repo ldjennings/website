@@ -3,7 +3,13 @@
 // Webfont files are copied in next to these by the flake (fonts/).
 
 #include "pages/index.typ"
+#include "pages/maze-robot.typ"
+#include "pages/reinforcement-learning.typ"
+#include "pages/robot-arm.typ"
+#include "pages/quadrotor.typ"
 #include "pages/formula-electric.typ"
+#include "pages/symbotic.typ"
+#include "pages/motion-planning.typ"
 #include "pages/resume.typ"
 
 #asset("layout.css", read("assets/layout.css"))
@@ -20,6 +26,24 @@
   "formula_inverter_pcb.png",
   "formula_radio_pcb.png",
   "formula_pedalbox.png",
+  "quadrotor_result.png",
+  "arm_home_pose.png",
+  "arm_dims.png",
+  "arm_dynamics.png",
+  "romi.jpg",
 ) {
   asset("img/" + f, read("assets/img/" + f, encoding: none))
+}
+
+// Report PDFs and code archives referenced by the write-ups.
+#for f in (
+  "valet.pdf",
+  "wildfire.pdf",
+  "transmission.pdf",
+  "robot-arm-report.pdf",
+  "rl-report.pdf",
+  "romi-code.zip",
+  "rl-code.zip",
+) {
+  asset("docs/" + f, read("assets/docs/" + f, encoding: none))
 }

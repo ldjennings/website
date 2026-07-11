@@ -1,15 +1,15 @@
 #import "../lib/skeleton.typ": webpage
 #import "../lib/cards.typ": project-card, article-row
 
-// Project write-ups still on the old Jekyll site; swapped for local pages
-// as they get ported.
+// Write-up pages, all local now; deraining stays external (it's its own
+// GitHub Pages site).
 #let up = (
-  motion: "https://jenningsliamd.me/robotics/2026/05/01/motion-planning/",
-  symbotic: "https://jenningsliamd.me/work/2025/12/15/symbotic/",
-  quad: "https://jenningsliamd.me/robotics/2023/12/13/UAV-sim/",
-  arm: "https://jenningsliamd.me/robotics/2023/12/03/robot-arm/",
-  romi: "https://jenningsliamd.me/robotics/2022/12/13/maze-robot/",
-  rl: "https://jenningsliamd.me/robotics/2022/12/16/reinforcement-learning/",
+  motion: "motion-planning.html",
+  symbotic: "symbotic.html",
+  quad: "quadrotor.html",
+  arm: "robot-arm.html",
+  romi: "maze-robot.html",
+  rl: "reinforcement-learning.html",
   derain: "https://ldjennings.github.io/CS539FinalProject",
 )
 

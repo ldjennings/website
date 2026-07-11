@@ -16,9 +16,9 @@
 #let nav-groups = (
   ("projects", (
     ("all projects", <projects>),
-    ("motion planning", "https://jenningsliamd.me/robotics/2026/05/01/motion-planning/"),
+    ("motion planning", <motion-planning>),
     ("formula electric", <formula-electric>),
-    ("symbotic co-op", "https://jenningsliamd.me/work/2025/12/15/symbotic/"),
+    ("symbotic co-op", <symbotic>),
   )),
   ("elsewhere", (
     ("github", "https://github.com/ldjennings"),
@@ -28,5 +28,6 @@
 )
 
 // Photo carried over from the current live site (52×52 source); doubles as
-// the favicon. A designed mark may replace it eventually.
-#let logo = html.img(class: "logo", src: "img/logo.jpg", alt: "")
+// the favicon. A designed mark may replace it eventually. `root` is the
+// page's prefix back to the bundle root (see skeleton.typ).
+#let logo(root) = html.img(class: "logo", src: root + "img/logo.jpg", alt: "")

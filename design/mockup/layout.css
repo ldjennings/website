@@ -672,6 +672,22 @@ details.more[open]::details-content {
   background: var(--surface);
 }
 
+/* Sub-sections inside a post (e.g. per-report entries). */
+.post h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 1.75rem 0 0.5rem;
+}
+
+/* Embedded demo videos. */
+.post .video-embed {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--overlay);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
 .post figcaption {
   font-size: 0.85rem;
   color: var(--muted);

@@ -98,8 +98,8 @@
     )
 
     #post-nav(
-      prev: ([quadrotor interception], "https://jenningsliamd.me/robotics/2023/12/13/UAV-sim/"),
-      next: ([symbotic co-op], "https://jenningsliamd.me/work/2025/12/15/symbotic/"),
+      prev: ([quadrotor interception], "quadrotor.html"),
+      next: ([symbotic co-op], "symbotic.html"),
     )
   ]
 ] <formula-electric>

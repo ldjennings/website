@@ -4,15 +4,33 @@
 // the .post CSS targets; the helpers below cover the classed pieces.
 
 // Captioned image. Branches on export target so the same post body can
-// feed both the HTML page and its PDF twin.
+// feed both the HTML page and its PDF twin. Posts live in posts/, hence
+// the ../ back to the bundle's img/.
 #let fig(name, caption, alt: "", width: 75%) = context {
   if target() == "html" {
     html.figure({
-      html.img(src: "img/" + name, alt: alt)
+      html.img(src: "../img/" + name, alt: alt)
       html.figcaption(caption)
     })
   } else {
     figure(image("../assets/img/" + name, width: width), caption: caption)
+  }
+}
+
+// Embedded YouTube demo video (HTML pages only; a paged target gets a
+// plain link instead).
+#let video(id, caption) = context {
+  if target() == "html" {
+    html.figure({
+      html.iframe(
+        class: "video-embed",
+        src: "https://www.youtube.com/embed/" + id,
+        allowfullscreen: true,
+      )
+      html.figcaption(caption)
+    })
+  } else {
+    [#link("https://www.youtube.com/watch?v=" + id)[#caption (video)]]
   }
 }
 

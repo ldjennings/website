@@ -1,21 +1,26 @@
 // Webpage skeleton: the shared HTML chrome every page is staged inside.
 // Pages call `webpage(path, title: ..)[content]` and get the sidebar
 // (desktop) / collapsible header menu (mobile) and colophon for free.
+//
+// Pages may live in subdirectories (posts/*.html): webpage() derives a
+// root prefix from the path so the chrome's asset references still
+// resolve. Label destinations need no prefix — the bundle export computes
+// relative hrefs itself.
 
 #import "dressing.typ": site-name, nav-main, nav-groups, logo
 
-#let head-stuff = {
+#let head-stuff(root) = {
   // Site ships its own dark theme; tells Dark Reader to leave it alone
   // (also avoids its first-load background flash). Typst can only emit
   // into <body>, but Dark Reader's lock check is document-wide.
   html.meta(name: "darkreader-lock")
-  html.link(rel: "icon", type: "image/jpeg", href: "img/logo.jpg")
-  html.link(rel: "stylesheet", href: "layout.css")
-  html.link(rel: "stylesheet", href: "theme.css")
+  html.link(rel: "icon", type: "image/jpeg", href: root + "img/logo.jpg")
+  html.link(rel: "stylesheet", href: root + "layout.css")
+  html.link(rel: "stylesheet", href: root + "theme.css")
 }
 
-#let brand = html.a(class: "brand", href: "index.html", {
-  logo
+#let brand(root) = html.a(class: "brand", href: root + "index.html", {
+  logo(root)
   html.span(class: "brand-name", site-name)
 })
 
@@ -45,14 +50,14 @@
   }
 })
 
-#let sidebar = html.aside(class: "sidebar", {
-  brand
+#let sidebar(root) = html.aside(class: "sidebar", {
+  brand(root)
   nav
 })
 
 // Mobile replacement for the sidebar: centered brand + collapsible menu.
-#let mobile-header = html.header(class: "mobile-header", {
-  brand
+#let mobile-header(root) = html.header(class: "mobile-header", {
+  brand(root)
   html.details({
     html.summary("menu")
     nav
@@ -66,14 +71,17 @@
   html.a(href: "https://github.com/ldjennings/website", "source")
 }))
 
-#let webpage(path, title: none, body) = document(path, title: title, {
-  head-stuff
-  sidebar
-  html.div(class: "page", {
-    mobile-header
-    html.main({
-      body
-      colophon
+#let webpage(path, title: none, body) = {
+  let root = "../" * (path.split("/").len() - 1)
+  document(path, title: title, {
+    head-stuff(root)
+    sidebar(root)
+    html.div(class: "page", {
+      mobile-header(root)
+      html.main({
+        body
+        colophon
+      })
     })
   })
-})
+}
