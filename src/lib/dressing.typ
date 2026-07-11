@@ -1,26 +1,32 @@
 // Set dressing: site identity and navigation content.
 // Change what the site *says* here; how it's laid out lives in skeleton.typ,
-// and how it *looks* lives in assets/main.css.
+// and how it *looks* lives in assets/layout.css + assets/theme.css.
 
-#let site-name = "liam jennings"
+#let site-name = "Liam Jennings"
 
+// Destinations are either URL strings or Typst labels — the bundle export
+// resolves labels to relative hrefs across documents (e.g. <writing> on
+// the index page becomes index.html#writing from any other page).
 #let nav-main = (
-  ("Home", "index.html"),
-  ("Blog", "blog.html"),
+  ("Home", <home>),
+  ("Blog", <writing>),
 )
 
-// (group title, ((label, href), ...))
+// (group title, ((text, dest), ...))
 #let nav-groups = (
-  ("documents", (
-    ("Blog as a single PDF", "blog.pdf"),
+  ("projects", (
+    ("all projects", <projects>),
+    ("motion planning", "https://jenningsliamd.me/robotics/2026/05/01/motion-planning/"),
+    ("formula electric", <formula-electric>),
+    ("symbotic co-op", "https://jenningsliamd.me/work/2025/12/15/symbotic/"),
   )),
   ("elsewhere", (
-    ("GitHub", "https://github.com/ldjennings"),
+    ("github", "https://github.com/ldjennings"),
+    ("email", "mailto:jenningsliamd@gmail.com"),
+    ("resume", "https://jenningsliamd.me/assets/documents/liam_jennings_06_20_2026.pdf"),
   )),
 )
 
-// Two overlapping rotated squares, approximating the reference logo in pure CSS.
-#let logo = html.elem("span", attrs: (class: "logo"), {
-  html.elem("span", attrs: (class: "logo-square logo-rose"))
-  html.elem("span", attrs: (class: "logo-square logo-teal"))
-})
+// Photo carried over from the current live site (52×52 source); doubles as
+// the favicon. A designed mark may replace it eventually.
+#let logo = html.img(class: "logo", src: "img/logo.jpg", alt: "")

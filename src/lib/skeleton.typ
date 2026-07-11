@@ -1,56 +1,79 @@
 // Webpage skeleton: the shared HTML chrome every page is staged inside.
 // Pages call `webpage(path, title: ..)[content]` and get the sidebar
-// (desktop) / collapsible header menu (mobile) for free.
+// (desktop) / collapsible header menu (mobile) and colophon for free.
 
 #import "dressing.typ": site-name, nav-main, nav-groups, logo
 
 #let head-stuff = {
-  html.elem("link", attrs: (rel: "stylesheet", href: "main.css"))
-  html.elem("link", attrs: (rel: "icon", href: "favicon.ico"))
+  // Site ships its own dark theme; tells Dark Reader to leave it alone
+  // (also avoids its first-load background flash). Typst can only emit
+  // into <body>, but Dark Reader's lock check is document-wide.
+  html.meta(name: "darkreader-lock")
+  html.link(rel: "icon", type: "image/jpeg", href: "img/logo.jpg")
+  html.link(rel: "stylesheet", href: "layout.css")
+  html.link(rel: "stylesheet", href: "theme.css")
 }
 
-#let brand = html.elem("a", attrs: (class: "brand", href: "index.html"), {
+#let brand = html.a(class: "brand", href: "index.html", {
   logo
-  html.elem("span", attrs: (class: "brand-name"), site-name)
+  html.span(class: "brand-name", site-name)
 })
 
-#let nav = html.elem("nav", attrs: (class: "site-nav"), {
-  html.elem("ul", attrs: (class: "nav-main"), {
-    for (label, href) in nav-main {
-      html.elem("li", html.elem("a", attrs: (href: href), label))
+// Label destinations go through native link() so the bundle export
+// resolves them; URL strings become plain anchors.
+#let nav-link(text, dest) = if type(dest) == label {
+  link(dest, text)
+} else {
+  html.a(href: dest, text)
+}
+
+#let nav = html.nav(class: "site-nav", {
+  html.ul(class: "nav-main", {
+    for (text, dest) in nav-main {
+      html.li(nav-link(text, dest))
     }
   })
   for (group, links) in nav-groups {
-    html.elem("div", attrs: (class: "nav-group"), {
-      html.elem("p", attrs: (class: "nav-group-title"), group)
-      html.elem("ul", {
-        for (label, href) in links {
-          html.elem("li", html.elem("a", attrs: (href: href), label))
+    html.div(class: "nav-group", {
+      html.p(class: "nav-group-title", group)
+      html.ul({
+        for (text, dest) in links {
+          html.li(nav-link(text, dest))
         }
       })
     })
   }
 })
 
-#let sidebar = html.elem("aside", attrs: (class: "sidebar"), {
+#let sidebar = html.aside(class: "sidebar", {
   brand
   nav
 })
 
 // Mobile replacement for the sidebar: centered brand + collapsible menu.
-#let mobile-header = html.elem("header", attrs: (class: "mobile-header"), {
+#let mobile-header = html.header(class: "mobile-header", {
   brand
-  html.elem("details", {
-    html.elem("summary", "menu")
+  html.details({
+    html.summary("menu")
     nav
   })
 })
 
+#let colophon = html.footer(class: "colophon", html.p({
+  [© #site-name · built with ]
+  html.a(href: "https://typst.app/", "typst")
+  [ · ]
+  html.a(href: "https://github.com/ldjennings/website", "source")
+}))
+
 #let webpage(path, title: none, body) = document(path, title: title, {
   head-stuff
   sidebar
-  html.elem("div", attrs: (class: "page"), {
+  html.div(class: "page", {
     mobile-header
-    html.elem("main", body)
+    html.main({
+      body
+      colophon
+    })
   })
 })

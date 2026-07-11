@@ -17,6 +17,16 @@
 
       fs = pkgs.lib.fileset;
 
+      # The webfont files theme.css declares @font-face for, taken verbatim
+      # from the pinned packages and served next to the pages as fonts/.
+      # Future work: subset + convert to woff2 during the build.
+      webFonts = pkgs.runCommand "site-webfonts" { } ''
+        mkdir -p "$out"
+        cp ${pkgs.alegreya}/share/fonts/opentype/Alegreya-{Regular,Italic,Medium,MediumItalic,Bold,BoldItalic}.otf "$out/"
+        cp ${pkgs.atkinson-hyperlegible}/share/fonts/opentype/AtkinsonHyperlegible-{Regular,Italic,Bold}.otf "$out/"
+        cp ${pkgs.atkinson-hyperlegible-mono}/share/fonts/opentype/AtkinsonHyperlegibleMono-{Regular,Bold}.otf "$out/"
+      '';
+
       # Only the files the site build needs, copied into the sandbox.
       siteSrc = fs.toSource {
         root = ./src;
@@ -40,7 +50,9 @@
         # whether or not they exist on the host system.
         fonts = [
           pkgs.libertinus # typst's default text face
-          pkgs.junicode # used by the PDF documents
+          pkgs.alegreya # display face (headings, brand)
+          pkgs.atkinson-hyperlegible # body face
+          pkgs.atkinson-hyperlegible-mono # code face
         ];
 
         creationTimestamp = self.lastModified;
@@ -54,6 +66,8 @@
           runHook preBuild
           mkdir -p "$out"
           typst "''${typstArgs[@]}" --features html,bundle "$out/"
+          mkdir -p "$out/fonts"
+          cp ${webFonts}/* "$out/fonts/"
           runHook postBuild
         '';
       };
@@ -68,6 +82,8 @@
           name = "site-${name}";
           runtimeInputs = [ site.typst-wrapped ];
           text = ''
+            mkdir -p build/fonts
+            cp -f ${webFonts}/* build/fonts/
             exec typst ${verb} --features html,bundle --format bundle \
               --ignore-system-fonts src/main.typ build/
           '';

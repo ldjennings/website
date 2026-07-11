@@ -3,26 +3,27 @@
 The settled look for the site, prototyped in raw HTML/CSS. Deliberately
 **not** nix-managed — iteration speed over reproducibility.
 
-**View it**: right-click `variant-a2/index.html` → "Open with Live Server".
+**View it**: right-click `mockup/index.html` → "Open with Live Server".
 Flip your system color scheme to see dark mode.
 
 ## Structure
 
-- `variant-a2/layout.css` — structure; colors/fonts only via role variables.
-- `variant-a2/theme.css` — the chosen theme: everforest shifted blue-first,
+- `mockup/layout.css` — structure; colors/fonts only via role variables.
+- `mockup/theme.css` — the chosen theme: everforest shifted blue-first,
   white dark-mode text, Alegreya + Atkinson Hyperlegible. Light and dark
   via `prefers-color-scheme`.
-- `variant-a2/index.html` — the landing page mockup.
-- `variant-a2/post.html` — the subpage template (blog posts / in-depth
+- `mockup/index.html` — the landing page mockup.
+- `mockup/post.html` — the subpage template (blog posts / in-depth
   project write-ups), built from the real Formula Electric write-up. The
   landing page's formula electric links point here so the click-through
   can be felt in Live Server.
-- `variant-a2/img/shot-*.png` — stand-in screenshots for the card bands
-  until real per-project images exist.
+- `mockup/img/` — real project images pulled from the live site
+  (jenningsliamd.me), plus its logo photo.
 
-Everything is CSS-only interaction (no JS), so it ports to the static
-Typst bundle export (`src/lib/skeleton.typ`, `src/lib/dressing.typ`,
-`src/assets/main.css`) when that time comes.
+Everything is CSS-only interaction (no JS), and **the port into the Typst
+bundle export has landed**: `src/` now produces this design (`src/lib/`,
+`src/pages/`, `src/assets/`). The mockup stays as the visual reference —
+if the design changes, change it here first, then mirror it in `src/`.
 
 ## Settled decisions
 
@@ -73,3 +74,7 @@ gradient thumbnails, tinted screenshots, Rosé Pine / gruvbox / kanagawa.
 - Mobile: sticky header?
 - Monospace: **Atkinson Hyperlegible Mono** is in the post template
   (same family as the body face) — pending verdict.
+- Webfonts ship as full OTFs copied from the nix packages; subset +
+  woff2-convert them during the build eventually.
+- Code blocks render unhighlighted (`set raw(theme: none)` in the Typst
+  post template) — an everforest tmTheme could bring colors back.

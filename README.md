@@ -29,14 +29,25 @@ stagecraft-themed:
 | Layer | Where | Role |
 | --- | --- | --- |
 | Set dressing | `src/lib/dressing.typ` | site name, nav links, logo — what the chrome *says* |
-| Skeleton | `src/lib/skeleton.typ` | `webpage()` wrapper emitting the sidebar / mobile header around each page |
-| Formatting | `src/assets/main.css` | all visual styling (palette, layout, responsive breakpoints) |
+| Skeleton | `src/lib/skeleton.typ` | `webpage()` wrapper emitting the sidebar / mobile header / colophon around each page |
+| Props | `src/lib/cards.typ`, `src/lib/post.typ` | project cards + article rows for the landing page; the long-form post template (`post()`, `fig()`, `btn()`, `post-nav()`) |
+| Formatting | `src/assets/layout.css` + `src/assets/theme.css` | structure vs. theme (everforest role variables, light+dark, self-hosted `@font-face`) |
 | Pages | `src/pages/*.typ` | one file per webpage; each calls `webpage(path, title: ..)[content]` |
 | Staging | `src/main.typ` | `#include`s every page and `#asset`s the shared static files |
 
-Cross-page links use ordinary Typst labels: `#webpage(..)[..] <blog>` in one
-file, `#link(<blog>)[..]` in another — the bundle export rewrites them to
-relative hrefs.
+The design itself (layout, theme, decisions log) was settled in
+`design/mockup/` — see `design/README.md`. Webfont files are copied from
+the nix-pinned font packages (Alegreya, Atkinson Hyperlegible + Mono) into
+`fonts/` by the flake, so visitors get the same faces the flake pins for
+the PDF outputs (future work: subset + woff2-convert them in the build).
+
+Cross-page links use ordinary Typst labels: `#webpage(..)[..] <home>` in
+one file, `#link(<home>)[..]` in another — the bundle export rewrites them
+to relative hrefs, including fragments (a labeled heading like
+`= writing <writing>` resolves to `index.html#writing` from other pages).
+The nav in `dressing.typ` accepts either labels or URL strings as
+destinations. Note: typst only emits an element id when its label is
+actually referenced somewhere.
 
 ## Caveats
 
