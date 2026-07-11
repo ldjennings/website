@@ -1,5 +1,5 @@
-#import "../lib/skeleton.typ": webpage
-#import "../lib/post.typ": post, post-nav
+#import "../../lib/skeleton.typ": webpage
+#import "../../lib/post.typ": post, post-nav
 
 #let meta = (
   category: "work",

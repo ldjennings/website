@@ -1,5 +1,5 @@
-#import "../lib/skeleton.typ": webpage
-#import "../lib/post.typ": post, btn, video, post-nav
+#import "../../lib/skeleton.typ": webpage
+#import "../../lib/post.typ": post, btn, video, post-nav
 
 #let meta = (
   category: "robotics",
@@ -59,7 +59,7 @@
     learning in a robotics context.
 
     #post-nav(
-      prev: ([maze-solving romis], "maze-robot.html"),
+      prev: ([maze-solving romi robots], "maze-robot.html"),
       next: ([single image deraining], "deraining.html"),
     )
   ]

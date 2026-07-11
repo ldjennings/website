@@ -1,5 +1,5 @@
-#import "../lib/skeleton.typ": webpage
-#import "../lib/post.typ": post, fig, btn, post-nav
+#import "../../lib/skeleton.typ": webpage
+#import "../../lib/post.typ": post, fig, btn, post-nav
 
 // Ported from the project's original GitHub Pages write-up (the Pages site
 // is gone; content recovered from the repo README). Date is approximate:

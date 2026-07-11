@@ -1,5 +1,5 @@
-#import "../lib/skeleton.typ": webpage
-#import "../lib/post.typ": post, btn, post-nav
+#import "../../lib/skeleton.typ": webpage
+#import "../../lib/post.typ": post, btn, post-nav
 
 #let meta = (
   category: "robotics",

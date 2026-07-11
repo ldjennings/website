@@ -1,5 +1,5 @@
-#import "../lib/skeleton.typ": webpage
-#import "../lib/post.typ": post, post-pdf, fig, btn, post-nav
+#import "../../lib/skeleton.typ": webpage
+#import "../../lib/post.typ": post, post-pdf, fig, btn, post-nav
 
 // One metadata dict feeds the HTML page, its PDF twin, and both titles.
 #let meta = (

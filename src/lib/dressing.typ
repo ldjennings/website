@@ -9,22 +9,22 @@
 // the index page becomes index.html#writing from any other page).
 #let nav-main = (
   ("Home", <home>),
-  ("Blog", <writing>),
+  ("Writing", <writing>),
   ("About", <about>),
 )
 
 // (group title, ((text, dest), ...))
 #let nav-groups = (
-  ("projects", (
-    ("all projects", <projects>),
-    ("motion planning", <motion-planning>),
-    ("formula electric", <formula-electric>),
-    ("symbotic co-op", <symbotic>),
+  ("Projects", (
+    ("Showcase", <projects>),
+    ("Motion planning", <motion-planning>),
+    ("Formula electric", <formula-electric>),
+    ("Symbotic co-op", <symbotic>),
   )),
-  ("elsewhere", (
-    ("github", "https://github.com/ldjennings"),
-    ("email", "mailto:jenningsliamd@gmail.com"),
-    ("resume", <resume>),
+  ("Elsewhere", (
+    ("GitHub", "https://github.com/ldjennings"),
+    ("Email", "mailto:jenningsliamd@gmail.com"),
+    ("Resume", <resume>),
   )),
 )
 

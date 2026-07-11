@@ -128,6 +128,34 @@
     date: datetime(year: 2025, month: 12, day: 15),
   ),
   (
+    title: [Embedded electronics for a formula EV],
+    href: up.formula,
+    desc: [An STM32 inverter controller and a driver radio board for WPI's
+      2024–25 car — PCB layout through firmware and integration.],
+    date: datetime(year: 2025, month: 5, day: 1),
+  ),
+  (
+    title: [Intercepting a UAV with sliding mode control],
+    href: up.quad,
+    desc: [A quadrotor tracking, capturing, and returning with an intruder
+      in simulation — and staying stable through the capture.],
+    date: datetime(year: 2023, month: 12, day: 13),
+  ),
+  (
+    title: [A 3-DOF arm, analyzed and then actually built],
+    href: up.arm,
+    desc: [Kinematics, trajectories, dynamics, and motor selection for
+      RBE 501 — plus the fabrication the course didn't require.],
+    date: datetime(year: 2023, month: 12, day: 3),
+  ),
+  (
+    title: [Single image deraining with a CVAE],
+    href: up.derain,
+    desc: [A variational autoencoder trained to remove raindrop blur, and
+      an honest account of where the reconstructions fell short.],
+    date: datetime(year: 2023, month: 8, day: 1),
+  ),
+  (
     title: [Reinforcement learning in ROS],
     href: up.rl,
     desc: [Teaching a simulated TurtleBot to push a cylinder to a goal in
@@ -152,13 +180,18 @@
     systems, real-time controls, and hardware validation — and I like
     making things well.]
 
-  = projects <projects>
+  = showcased projects <projects>
+
+  // #html.p(class: "section-lede")[A hand-picked cut of my work — each card
+  //   links to a full write-up.]
 
   #html.div(class: "project-grid")[
     #for p in projects { project-card(..p) }
   ]
 
   = writing <writing>
+
+  #html.p(class: "section-lede")[Every write-up on the site, including the showcased projects above.]
 
   #html.ul(class: "article-list")[
     #for a in articles { article-row(..a) }
