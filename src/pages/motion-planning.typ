@@ -8,7 +8,7 @@
   title: [RBE 550 Motion Planning Reports],
 )
 
-#webpage("motion-planning.html", title: meta.title)[
+#webpage("posts/motion-planning.html", title: meta.title)[
   #post(..meta)[
     = overview
 
@@ -26,7 +26,7 @@
     and car with trailer. Includes collision detection optimizations and
     Reeds-Shepp path connections.
 
-    #btn(([Download report ↓], "docs/valet.pdf"))
+    #btn(([Download report ↓], "../docs/valet.pdf"))
 
     == Wildfire: discrete vs sampling-based planning
 
@@ -34,7 +34,7 @@
     using A\* to ignite obstacles, and a firetruck using a PRM with
     Reeds-Shepp local connections to pursue and extinguish fires.
 
-    #btn(([Download report ↓], "docs/wildfire.pdf"))
+    #btn(([Download report ↓], "../docs/wildfire.pdf"))
 
     == Transmission: BiRRT for disassembly planning
 
@@ -42,7 +42,7 @@
     mainshaft of an SM-465 manual transmission, navigating around the
     countershaft and enclosure geometry.
 
-    #btn(([Download report ↓], "docs/transmission.pdf"))
+    #btn(([Download report ↓], "../docs/transmission.pdf"))
 
     = what i learned
 

@@ -106,8 +106,15 @@
       # `nix build` produces result/ with the compiled site.
       packages.${system}.default = site;
 
-      # `nix flake check` builds the site.
-      checks.${system}.site-builds = site;
+      # `nix flake check` builds the site and audits it for dead links
+      # (every local href/src must resolve to a file, fragments to an id).
+      checks.${system} = {
+        site-builds = site;
+        link-audit = pkgs.runCommand "link-audit" { } ''
+          ${pkgs.lib.getExe pkgs.python3} ${./tools/check-links.py} ${site}
+          touch "$out"
+        '';
+      };
 
       # `nix run .#watch` / `nix run .#build` — replicable dev loop.
       apps.${system} = {

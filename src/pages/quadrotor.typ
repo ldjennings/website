@@ -8,7 +8,7 @@
   title: [Intercepting a Simulated UAV with a Quadrotor Using Sliding Mode Control],
 )
 
-#webpage("quadrotor.html", title: meta.title)[
+#webpage("posts/quadrotor.html", title: meta.title)[
   #post(..meta)[
     = overview
 

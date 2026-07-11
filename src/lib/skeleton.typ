@@ -14,6 +14,10 @@
   // (also avoids its first-load background flash). Typst can only emit
   // into <body>, but Dark Reader's lock check is document-wide.
   html.meta(name: "darkreader-lock")
+  // Tints the mobile browser toolbar to match the page background
+  // (values mirror --bg in theme.css).
+  html.meta(name: "theme-color", media: "(prefers-color-scheme: light)", content: "#fdf6e3")
+  html.meta(name: "theme-color", media: "(prefers-color-scheme: dark)", content: "#2d353b")
   html.link(rel: "icon", type: "image/jpeg", href: root + "img/logo.jpg")
   html.link(rel: "stylesheet", href: root + "layout.css")
   html.link(rel: "stylesheet", href: root + "theme.css")
@@ -71,9 +75,13 @@
   html.a(href: "https://github.com/ldjennings/website", "source")
 }))
 
-#let webpage(path, title: none, body) = {
-  let root = "../" * (path.split("/").len() - 1)
+// base: set to "/" for pages served at arbitrary URLs (the 404 page) —
+// emits a <base> so every relative href resolves from the site root
+// instead of the requested path. Browsers honor <base> from <body>.
+#let webpage(path, title: none, base: none, body) = {
+  let root = if base == none { "../" * (path.split("/").len() - 1) } else { "" }
   document(path, title: title, {
+    if base != none { html.base(href: base) }
     head-stuff(root)
     sidebar(root)
     html.div(class: "page", {

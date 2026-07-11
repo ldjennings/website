@@ -8,7 +8,7 @@
   title: [Reinforcement Learning in ROS],
 )
 
-#webpage("reinforcement-learning.html", title: meta.title)[
+#webpage("posts/reinforcement-learning.html", title: meta.title)[
   #post(..meta)[
     = overview
 
@@ -42,8 +42,8 @@
     #video("sYeYrgIsD40", [Deep Q-learning training run, sped up])
 
     #btn(
-      ([Report ↓], "docs/rl-report.pdf"),
-      ([Explore the codebase ↓], "docs/rl-code.zip"),
+      ([Report ↓], "../docs/rl-report.pdf"),
+      ([Explore the codebase ↓], "../docs/rl-code.zip"),
     )
 
     = what i learned
@@ -60,7 +60,7 @@
 
     #post-nav(
       prev: ([maze-solving romis], "maze-robot.html"),
-      next: ([3-dof robot arm], "robot-arm.html"),
+      next: ([single image deraining], "deraining.html"),
     )
   ]
 ] <reinforcement-learning>

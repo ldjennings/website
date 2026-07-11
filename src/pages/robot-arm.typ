@@ -8,7 +8,7 @@
   title: [3-DOF Robot Arm Design and Fabrication],
 )
 
-#webpage("robot-arm.html", title: meta.title)[
+#webpage("posts/robot-arm.html", title: meta.title)[
   #post(..meta)[
     = overview
 
@@ -65,10 +65,10 @@
     estimated motor requirements before completing the full analysis,
     which let us start fabrication in parallel.
 
-    #btn(([View full report ↓], "docs/robot-arm-report.pdf"))
+    #btn(([View full report ↓], "../docs/robot-arm-report.pdf"))
 
     #post-nav(
-      prev: ([reinforcement learning in ros], "reinforcement-learning.html"),
+      prev: ([single image deraining], "deraining.html"),
       next: ([quadrotor interception], "quadrotor.html"),
     )
   ]

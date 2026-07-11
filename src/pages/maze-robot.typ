@@ -8,7 +8,7 @@
   title: [Maze-Solving ROMI Robots],
 )
 
-#webpage("maze-robot.html", title: meta.title)[
+#webpage("posts/maze-robot.html", title: meta.title)[
   #post(..meta)[
     = overview
 
@@ -50,7 +50,7 @@
 
     #video("Xb8Sdb8YRmQ", [Autonomous maze navigation demo])
 
-    #btn(([Explore the codebase ↓], "docs/romi-code.zip"))
+    #btn(([Explore the codebase ↓], "../docs/romi-code.zip"))
 
     = what i learned
 

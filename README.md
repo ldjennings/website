@@ -32,7 +32,7 @@ stagecraft-themed:
 | Skeleton | `src/lib/skeleton.typ` | `webpage()` wrapper emitting the sidebar / mobile header / colophon around each page |
 | Props | `src/lib/cards.typ`, `src/lib/post.typ` | project cards + article rows for the landing page; the long-form post template (`post()`, `fig()`, `btn()`, `post-nav()`) |
 | Formatting | `src/assets/layout.css` + `src/assets/theme.css` | structure vs. theme (everforest role variables, light+dark, self-hosted `@font-face`) |
-| Pages | `src/pages/*.typ` | one file per webpage; each calls `webpage(path, title: ..)[content]` |
+| Pages | `src/pages/*.typ` | one file per webpage; each calls `webpage(path, title: ..)[content]`. Write-ups live under `posts/` in the bundle — `webpage()` derives the `../` prefix for chrome assets from the path |
 | Staging | `src/main.typ` | `#include`s every page and `#asset`s the shared static files |
 
 The resume comes in as a flake input (`github.com/ldjennings/Resume`,

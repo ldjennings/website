@@ -3,14 +3,17 @@
 // Webfont files are copied in next to these by the flake (fonts/).
 
 #include "pages/index.typ"
+#include "pages/about.typ"
 #include "pages/maze-robot.typ"
 #include "pages/reinforcement-learning.typ"
+#include "pages/deraining.typ"
 #include "pages/robot-arm.typ"
 #include "pages/quadrotor.typ"
 #include "pages/formula-electric.typ"
 #include "pages/symbotic.typ"
 #include "pages/motion-planning.typ"
 #include "pages/resume.typ"
+#include "pages/notfound.typ"
 
 #asset("layout.css", read("assets/layout.css"))
 #asset("theme.css", read("assets/theme.css"))
@@ -23,6 +26,11 @@
   "real-quad.png",
   "real-arm.jpg",
   "real-derain.png",
+  "derain_pair.jpg",
+  "derain_pair2.jpg",
+  "derain_tuning.jpg",
+  "derain_training.jpg",
+  "derain_testing.jpg",
   "formula_inverter_pcb.png",
   "formula_radio_pcb.png",
   "formula_pedalbox.png",

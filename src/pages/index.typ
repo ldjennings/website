@@ -1,16 +1,16 @@
 #import "../lib/skeleton.typ": webpage
 #import "../lib/cards.typ": project-card, article-row
 
-// Write-up pages, all local now; deraining stays external (it's its own
-// GitHub Pages site).
+// Write-up pages, all local under posts/.
 #let up = (
-  motion: "motion-planning.html",
-  symbotic: "symbotic.html",
-  quad: "quadrotor.html",
-  arm: "robot-arm.html",
-  romi: "maze-robot.html",
-  rl: "reinforcement-learning.html",
-  derain: "https://ldjennings.github.io/CS539FinalProject",
+  motion: "posts/motion-planning.html",
+  symbotic: "posts/symbotic.html",
+  formula: "posts/formula-electric.html",
+  quad: "posts/quadrotor.html",
+  arm: "posts/robot-arm.html",
+  romi: "posts/maze-robot.html",
+  rl: "posts/reinforcement-learning.html",
+  derain: "posts/deraining.html",
 )
 
 #let projects = (
@@ -47,7 +47,7 @@
   ),
   (
     title: [formula electric],
-    href: "formula-electric.html",
+    href: up.formula,
     thumb: "thumb-formula",
     badge: ("open", "open source"),
     tags: ("stm32", "can", "pcb"),
@@ -59,7 +59,7 @@
       board for live telemetry — PCB design through firmware and vehicle
       integration.],
     links: (
-      ("write-up", "formula-electric.html"),
+      ("write-up", up.formula),
       ("source", "https://github.com/ldjennings/driver-radio"),
     ),
   ),
@@ -103,10 +103,10 @@
       raindrop blur from photographs.],
     blurb: [A CVAE trained to reconstruct clean images from rain-degraded
       inputs, built as a machine learning course final project. The
-      project site walks through the architecture, training, and results
-      side by side with the degraded originals.],
+      write-up walks through the architecture, the DeRaindrop dataset,
+      and an honest look at where the reconstructions fell short.],
     links: (
-      ("project site", up.derain),
+      ("write-up", up.derain),
       ("source", "https://github.com/ldjennings/deraining-tools"),
     ),
   ),

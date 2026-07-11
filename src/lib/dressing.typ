@@ -10,6 +10,7 @@
 #let nav-main = (
   ("Home", <home>),
   ("Blog", <writing>),
+  ("About", <about>),
 )
 
 // (group title, ((text, dest), ...))

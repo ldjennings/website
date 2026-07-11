@@ -8,7 +8,7 @@
   title: [Hardware Test Engineering Co-op at Symbotic],
 )
 
-#webpage("symbotic.html", title: meta.title)[
+#webpage("posts/symbotic.html", title: meta.title)[
   #post(..meta)[
     = overview
 

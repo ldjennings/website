@@ -88,7 +88,7 @@
     boards I made will be used and modified by future team members.]
 ]
 
-#webpage("formula-electric.html", title: meta.title)[
+#webpage("posts/formula-electric.html", title: meta.title)[
   #post(..meta)[
     #body
 
@@ -106,6 +106,6 @@
 
 // PDF twin of the write-up — plain #document, no HTML chrome, same body.
 // Fonts come from the flake's pinned set, matching the web faces.
-#document("formula-electric.pdf", title: meta.title)[
+#document("posts/formula-electric.pdf", title: meta.title)[
   #post-pdf(..meta, body)
 ]
