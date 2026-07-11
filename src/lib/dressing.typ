@@ -7,20 +7,28 @@
 // Destinations are either URL strings or Typst labels — the bundle export
 // resolves labels to relative hrefs across documents (e.g. <writing> on
 // the index page becomes index.html#writing from any other page).
+// An entry may carry a third element — ((text, dest), ...) — rendered as
+// a collapsible sub-list under the link (the caret toggles it).
 #let nav-main = (
   ("Home", <home>),
+  ("Projects", <projects>, (
+    ("Motion planning", <motion-planning>),
+    ("Symbotic co-op", <symbotic>),
+    ("Formula electric", <formula-electric>),
+    ("Quadrotor interception", <quadrotor>),
+    ("3-DOF robot arm", <robot-arm>),
+    ("Single image deraining", <deraining>),
+  )),
   ("Writing", <writing>),
+)
+
+// Standalone pages — set apart from nav-main, which is all index anchors.
+#let nav-pages = (
   ("About", <about>),
 )
 
 // (group title, ((text, dest), ...))
 #let nav-groups = (
-  ("Projects", (
-    ("Showcase", <projects>),
-    ("Motion planning", <motion-planning>),
-    ("Formula electric", <formula-electric>),
-    ("Symbotic co-op", <symbotic>),
-  )),
   ("Elsewhere", (
     ("GitHub", "https://github.com/ldjennings"),
     ("Email", "mailto:jenningsliamd@gmail.com"),

@@ -135,6 +135,56 @@ body {
   color: var(--love);
 }
 
+/* Projects expands into the showcased write-ups: the summary's link
+   navigates, its caret toggles the sub-list. */
+.nav-expand summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.nav-expand summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Border-drawn chevron — no glyph, so no font-fallback surprises. */
+.nav-expand summary::after {
+  content: "";
+  width: 0.4em;
+  height: 0.4em;
+  align-self: center;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(-45deg);
+  transition: transform 0.15s;
+}
+
+.nav-expand[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.site-nav .nav-sub {
+  font-size: 1rem;
+  margin: 0.5rem 0 0.25rem;
+  padding-left: 1rem;
+  border-left: 1px dashed var(--muted);
+}
+
+.nav-sub a {
+  color: var(--subtle);
+}
+
+/* Standalone pages — set apart from the index anchors above them. */
+.nav-pages {
+  font-size: 1.15rem;
+}
+
+.nav-pages a {
+  color: var(--subtle);
+}
+
 .nav-group-title {
   font-variant-caps: all-small-caps;
   font-size: 1.15rem;

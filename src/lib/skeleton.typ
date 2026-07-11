@@ -7,7 +7,7 @@
 // resolve. Label destinations need no prefix — the bundle export computes
 // relative hrefs itself.
 
-#import "dressing.typ": site-name, nav-main, nav-groups, logo
+#import "dressing.typ": site-name, nav-main, nav-pages, nav-groups, logo
 
 #let head-stuff(root) = {
   // Site ships its own dark theme; tells Dark Reader to leave it alone
@@ -36,9 +36,29 @@
   html.a(href: dest, text)
 }
 
+// Entries with a sub-list become a <details>: the summary holds the real
+// link (clicking it navigates) plus a CSS caret that toggles the list.
 #let nav = html.nav(class: "site-nav", {
   html.ul(class: "nav-main", {
-    for (text, dest) in nav-main {
+    for entry in nav-main {
+      let (text, dest) = (entry.at(0), entry.at(1))
+      let sub = entry.at(2, default: none)
+      if sub == none {
+        html.li(nav-link(text, dest))
+      } else {
+        html.li(html.details(class: "nav-expand", {
+          html.summary(nav-link(text, dest))
+          html.ul(class: "nav-sub", {
+            for (text, dest) in sub {
+              html.li(nav-link(text, dest))
+            }
+          })
+        }))
+      }
+    }
+  })
+  html.ul(class: "nav-pages", {
+    for (text, dest) in nav-pages {
       html.li(nav-link(text, dest))
     }
   })
