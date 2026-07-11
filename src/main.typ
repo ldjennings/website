@@ -4,6 +4,7 @@
 
 #include "pages/index.typ"
 #include "pages/formula-electric.typ"
+#include "pages/resume.typ"
 
 #asset("layout.css", read("assets/layout.css"))
 #asset("theme.css", read("assets/theme.css"))

@@ -35,6 +35,14 @@ stagecraft-themed:
 | Pages | `src/pages/*.typ` | one file per webpage; each calls `webpage(path, title: ..)[content]` |
 | Staging | `src/main.typ` | `#include`s every page and `#asset`s the shared static files |
 
+The resume comes in as a flake input (`github.com/ldjennings/Resume`,
+fetched over SSH — it's private): its exported PDF + SVG are copied into
+the bundle as `resume.pdf` / `resume.svg`, and `src/pages/resume.typ`
+frames the SVG sheet in the site chrome with a PDF download button. (An
+HTML-text edition of the CV was tried and rejected — the typeset sheet
+looks better and has no content drift.) After pushing resume changes,
+run `nix flake update resume`.
+
 The design itself (layout, theme, decisions log) was settled in
 `design/mockup/` — see `design/README.md`. Webfont files are copied from
 the nix-pinned font packages (Alegreya, Atkinson Hyperlegible + Mono) into

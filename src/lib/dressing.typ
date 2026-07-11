@@ -23,7 +23,7 @@
   ("elsewhere", (
     ("github", "https://github.com/ldjennings"),
     ("email", "mailto:jenningsliamd@gmail.com"),
-    ("resume", "https://jenningsliamd.me/assets/documents/liam_jennings_06_20_2026.pdf"),
+    ("resume", <resume>),
   )),
 )
 

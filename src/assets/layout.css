@@ -711,8 +711,8 @@ details.more[open]::details-content {
   color: var(--subtle);
 }
 
-/* PDF / download buttons, as on the report write-ups. */
-.post .button {
+/* PDF / download buttons (posts and the resume page). */
+.button {
   display: inline-block;
   border: 1px solid var(--pine);
   color: var(--pine);
@@ -722,7 +722,7 @@ details.more[open]::details-content {
   font-size: 0.95rem;
 }
 
-.post .button:hover {
+.button:hover {
   background: color-mix(in srgb, var(--pine) 10%, transparent);
 }
 
@@ -754,4 +754,19 @@ details.more[open]::details-content {
   .post figure {
     margin: 2rem 0;
   }
+}
+
+/* ---- Resume page ---- */
+
+/* The sheet is the resume flake's SVG export — a paper page, so it stays
+   white in both color schemes. */
+.resume-sheet {
+  display: block;
+  width: 100%;
+  max-width: 52rem;
+  margin: 0.5rem auto 0;
+  background: #fff;
+  border: 1px solid var(--overlay);
+  border-radius: 6px;
+  box-shadow: 0 2px 10px var(--shadow-soft);
 }
