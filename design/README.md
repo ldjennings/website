@@ -13,6 +13,10 @@ Flip your system color scheme to see dark mode.
   white dark-mode text, Alegreya + Atkinson Hyperlegible. Light and dark
   via `prefers-color-scheme`.
 - `variant-a2/index.html` — the landing page mockup.
+- `variant-a2/post.html` — the subpage template (blog posts / in-depth
+  project write-ups), built from the real Formula Electric write-up. The
+  landing page's formula electric links point here so the click-through
+  can be felt in Live Server.
 - `variant-a2/img/shot-*.png` — stand-in screenshots for the card bands
   until real per-project images exist.
 
@@ -38,7 +42,20 @@ served):
 - Theme: **everforest, blue-first** (green demoted out; blue leads, aqua
   supports), white dark-mode foreground instead of stock tan.
 - Dark mode ships with light mode, same role variables.
+- `<meta name="darkreader-lock">` on every page: the site provides its
+  own dark theme, so Dark Reader must not recolor it (also fixes its
+  first-load two-tone background flash in Firefox).
+- Hover previews carry a full-surface link to the same destination as
+  the card, so the deployed preview stays clickable.
 - Smooth anchor scrolling; colophon footer.
+- Fonts: **Alegreya** (display) + **Atkinson Hyperlegible** (body),
+  confirmed after seeing them on real content. Loaded from Google Fonts
+  in the mockup; pin them in the flake for the Typst build.
+- Post template: 46rem prose measure centered in the main column;
+  eyebrow (category · date) + title + tags header; bordered figures with
+  captions that break out wider than the text; code in **Atkinson
+  Hyperlegible Mono**; pine-rule blockquotes; download/source buttons;
+  older/newer footer nav. Section h2s keep the diamond accents.
 
 Rejected along the way: editorial/ambiguous layouts where projects and
 articles look alike (variant C), Fraunces, literal youwen copying,
@@ -54,5 +71,5 @@ gradient thumbnails, tinted screenshots, Rosé Pine / gruvbox / kanagawa.
 - Card click destination: project page vs GitHub repo.
 - Hover-preview trigger: whole card (current, 0.18s delay) vs title only.
 - Mobile: sticky header?
-- Fonts: Alegreya/Atkinson arrived with everforest and look right, but
-  haven't been separately stress-tested (long articles, code blocks).
+- Monospace: **Atkinson Hyperlegible Mono** is in the post template
+  (same family as the body face) — pending verdict.

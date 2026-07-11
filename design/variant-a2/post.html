@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WPI Formula Electric 2025 — Liam Jennings</title>
+<!-- Site ships its own dark theme; tells Dark Reader to leave it alone. -->
+<meta name="darkreader-lock">
+<link rel="icon" type="image/jpeg" href="img/logo.jpg">
+<link rel="stylesheet" href="layout.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <img class="logo" src="img/logo.jpg" alt="">
+    <span class="brand-name">Liam Jennings</span>
+  </a>
+  <nav class="site-nav">
+    <ul class="nav-main">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#writing">Blog</a></li>
+    </ul>
+    <div class="nav-group">
+      <p class="nav-group-title">projects</p>
+      <ul>
+        <li><a href="index.html#projects">all projects</a></li>
+        <li><a href="https://jenningsliamd.me/robotics/2026/05/01/motion-planning/">motion planning</a></li>
+        <li><a href="post.html">formula electric</a></li>
+        <li><a href="https://jenningsliamd.me/work/2025/12/15/symbotic/">symbotic co-op</a></li>
+      </ul>
+    </div>
+    <div class="nav-group">
+      <p class="nav-group-title">elsewhere</p>
+      <ul>
+        <li><a href="https://github.com/ldjennings">github</a></li>
+        <li><a href="mailto:jenningsliamd@gmail.com">email</a></li>
+        <li><a href="https://jenningsliamd.me/assets/documents/liam_jennings_06_20_2026.pdf">resume</a></li>
+      </ul>
+    </div>
+  </nav>
+</aside>
+
+<div class="page">
+  <header class="mobile-header">
+    <a class="brand" href="index.html">
+      <img class="logo" src="img/logo.jpg" alt="">
+      <span class="brand-name">Liam Jennings</span>
+    </a>
+    <details>
+      <summary>menu</summary>
+      <nav class="site-nav">
+        <ul class="nav-main">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#writing">Blog</a></li>
+        </ul>
+      </nav>
+    </details>
+  </header>
+
+  <main>
+    <article class="post">
+      <header class="post-header">
+        <p class="post-eyebrow"><span class="post-category">robotics</span> · <time datetime="2025-05-01">01 May 2025</time></p>
+        <h1 class="post-title">WPI Formula Electric 2025 — Electronics &amp; Software</h1>
+        <ul class="tags"><li>stm32</li><li>can</li><li>pcb</li></ul>
+      </header>
+
+      <h2>overview</h2>
+      <p>As part of WPI's Formula Electric team for the 2024–2025 season,
+      I designed and validated embedded electronics for our competition
+      vehicle. My work spanned PCB design, firmware development, and
+      system integration across multiple subsystems.</p>
+
+      <figure>
+        <img src="img/real-formula.jpg" alt="The WPI Formula Electric 2025 car on track">
+        <figcaption>WPI Formula Electric 2025 vehicle</figcaption>
+      </figure>
+
+      <h2>inverter controller board</h2>
+      <p>The inverter controller serves as the interface between the pedal
+      assembly and the motor controller. It reads analog signals from the
+      throttle and brake pedals, processes them through an STM32
+      microcontroller, and communicates with the inverter over CAN bus.</p>
+
+      <figure>
+        <img src="img/formula_inverter_pcb.png" alt="Inverter controller PCB">
+        <figcaption>Inverter controller PCB, rev 1</figcaption>
+      </figure>
+
+      <p>Key features:</p>
+      <ul>
+        <li>STM32-based mixed-signal design</li>
+        <li>CAN bus communication to inverter</li>
+        <li>Analog signal conditioning for pedal inputs</li>
+        <li>Onboard power regulation</li>
+      </ul>
+
+      <p>The rules require a pedal plausibility check: if the two throttle
+      sensors disagree by more than 10&nbsp;% of travel, torque must be cut
+      until they agree again. The firmware treats this as a small state
+      machine polled from the <code>1&nbsp;kHz</code> control loop:</p>
+
+      <pre><code>static bool plausible(uint16_t a, uint16_t b) {
+    /* T.4.2.4: >10% implausibility for >100 ms cuts torque */
+    return abs_diff(a, b) &lt;= APPS_TOLERANCE;
+}
+
+if (!plausible(apps1, apps2)) {
+    if (++implausible_ms > 100) torque_request = 0;
+} else {
+    implausible_ms = 0;
+}</code></pre>
+
+      <h2>driver radio board</h2>
+      <p>I designed a Bluetooth-based radio system for live telemetry and
+      driver–ground communication. The second revision addressed issues
+      from the initial prototype and added an SD card for local data
+      logging.</p>
+
+      <figure>
+        <img src="img/formula_radio_pcb.png" alt="Driver radio PCB">
+        <figcaption>Driver radio board, rev 2</figcaption>
+      </figure>
+
+      <h2>pedalbox integration</h2>
+      <p>Beyond PCB design, I worked on integrating the electronics with
+      the mechanical pedal assembly, routing wiring harnesses and
+      verifying sensor signals with oscilloscope measurements.</p>
+
+      <figure>
+        <img src="img/formula_pedalbox.png" alt="Assembled pedalbox with sensors and wiring">
+        <figcaption>Assembled pedalbox</figcaption>
+      </figure>
+
+      <h2>what i learned</h2>
+      <p>This project gave me end-to-end experience with embedded hardware
+      development — from schematic capture and PCB layout through board
+      bring-up, firmware debugging, and system validation. Debugging
+      communication issues across CAN, UART, SPI, and I2C taught me how to
+      systematically isolate faults using SWD debuggers and
+      oscilloscopes.</p>
+
+      <blockquote>
+        <p>Working on a team vehicle also reinforced the importance of
+        documentation and designing for maintainability — the boards I
+        made will be used and modified by future team members.</p>
+      </blockquote>
+
+      <p><a class="button" href="https://github.com/ldjennings/driver-radio">Browse the source ↗</a></p>
+
+      <nav class="post-nav">
+        <a class="prev" href="https://jenningsliamd.me/robotics/2023/12/13/UAV-sim/">
+          <span class="post-nav-label">← older</span>
+          quadrotor interception
+        </a>
+        <a class="next" href="https://jenningsliamd.me/work/2025/12/15/symbotic/">
+          <span class="post-nav-label">newer →</span>
+          symbotic co-op
+        </a>
+      </nav>
+    </article>
+
+    <footer class="colophon">
+      <p>© Liam Jennings · built with <a href="https://typst.app/">typst</a>
+      · <a href="https://github.com/ldjennings/website">source</a></p>
+    </footer>
+  </main>
+</div>
+
+</body>
+</html>

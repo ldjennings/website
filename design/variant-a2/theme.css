@@ -5,12 +5,13 @@
    Type: Alegreya display over Atkinson Hyperlegible body — bookish and
    humanist, tuned for long-form readability. */
 
-@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..700;1,400..700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..700;1,400..700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Atkinson+Hyperlegible+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
   color-scheme: light dark;
   --font-display: "Alegreya", Georgia, serif;
   --font-body: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-mono: "Atkinson Hyperlegible Mono", ui-monospace, monospace;
 
   --bg: #fdf6e3;
   --surface: #f4f0d9;
