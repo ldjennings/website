@@ -84,22 +84,13 @@ body {
   white-space: nowrap;
 }
 
-/* Temporary monogram tile — placeholder until a real logo exists. */
+/* Logo photo carried over from the current live site (52×52 source). */
 .logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 44px;
   height: 44px;
   flex: none;
-  background: var(--pine);
-  color: var(--bg);
   border-radius: 10px;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.45rem;
-  line-height: 1;
-  user-select: none;
+  object-fit: cover;
 }
 
 /* ---- Nav ---- */
@@ -196,10 +187,23 @@ summary:focus-visible {
   outline-offset: 2px;
 }
 
+/* Page title above the intro gives the content some air at the top. */
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 2.4rem;
+  line-height: 1.2;
+  margin: 2.5rem 0 0.75rem;
+}
+
+.title-sep {
+  color: var(--muted);
+  font-weight: 400;
+}
+
 .intro {
   font-size: 1.15rem;
-  max-width: 38rem;
-  margin-top: 0.5rem;
+  margin-top: 0;
 }
 
 /* Small rotated-diamond accent before section headings. */
@@ -260,8 +264,8 @@ h2::before {
 }
 
 /* Thumbnail band: fixed ratio keeps the grid neat regardless of image.
-   Real screenshots, untinted (decided in the thumbnail lab). The shot-*.png
-   files are crops of actual renders standing in for per-project images. */
+   Real screenshots, untinted (decided in the thumbnail lab). Images pulled
+   from the current live site (jenningsliamd.me). */
 .thumb {
   aspect-ratio: 3 / 1;
   border-bottom: 1px solid var(--overlay);
@@ -270,12 +274,15 @@ h2::before {
   background-position: center;
 }
 
-.thumb-web   { background-image: url("img/shot-1.png"); }
-.thumb-dots  { background-image: url("img/shot-2.png"); }
-.thumb-ray   { background-image: url("img/shot-3.png"); }
-.thumb-chip  { background-image: url("img/shot-4.png"); }
-.thumb-notes { background-image: url("img/shot-5.png"); }
-.thumb-lab   { background-image: url("img/shot-6.png"); }
+.thumb-motion  { background-image: url("img/real-motion.png"); }
+.thumb-formula { background-image: url("img/real-formula.jpg"); }
+.thumb-arm     { background-image: url("img/real-arm.jpg"); }
+.thumb-quad    { background-image: url("img/real-quad.png"); background-color: #fff; }
+.thumb-derain  { background-image: url("img/real-derain.png"); }
+/* Symbotic has no shareable photos — logo on navy, like the live site. */
+.thumb-sym {
+  background: #1a1a2e url("img/real-sym.svg") center / auto 55% no-repeat;
+}
 
 .card-body {
   padding: 1rem 1.25rem 0.9rem;
