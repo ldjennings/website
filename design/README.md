@@ -57,6 +57,14 @@ served):
   captions that break out wider than the text; code in **Atkinson
   Hyperlegible Mono**; pine-rule blockquotes; download/source buttons;
   older/newer footer nav. Section h2s keep the diamond accents.
+- In-page navigation: pages with headings add an "on this page" sidebar
+  group — a per-page TOC of the page's sections, h3 sub-sections nested
+  like the Projects sub-list; also inside the mobile menu. Automatic in
+  the Typst build (built from the page body's headings, which get anchor
+  ids to match); only the index opts out (`toc: false`) — nav-main
+  already lists its sections. Rejected alternative: a right-hand rail
+  (docs-style) — clearer site-nav/page-nav separation, but a new column
+  hidden at common widths with no mobile story.
 
 Rejected along the way: editorial/ambiguous layouts where projects and
 articles look alike (variant C), Fraunces, literal youwen copying,

@@ -61,8 +61,14 @@ actually referenced somewhere.
 
 - Bundle export is experimental; the CLI warns on every compile and the
   interface may change.
-- Typst currently emits `<link rel="stylesheet">` at the top of `<body>`
-  rather than hoisting it into `<head>`. Browsers apply it fine, but it is
-  technically non-conforming HTML.
+- Typst currently emits `<link rel="stylesheet">` (and the other head
+  tags) at the top of `<body>` rather than in `<head>` — non-conforming
+  HTML, and Firefox paints unstyled content while in-body stylesheets
+  load. The build fixes this by rewriting the pages afterwards
+  (`tools/hoist-head.py`); the script *fails* when it finds nothing to
+  move, so a typst release that emits `<head>` content itself will show
+  up as a build failure and the step can be retired. `just watch` skips
+  the hoist (typst rewrites output continuously), so the dev loop shows
+  typst's raw output.
 - Nix flakes only see git-tracked files: `git add` new source files or
   `nix build` will fail to find them.

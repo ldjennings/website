@@ -73,10 +73,15 @@
         # bundle export needs both experimental flags, so append them here.
         # Bundle output is a directory tree (one file per #document/#asset),
         # written into $out directly — the finished site, ready to serve.
+        # After typst runs, hoist the in-body <meta>/<link>/<base> tags into
+        # <head> — typst can't emit there itself, and Firefox flashes
+        # unstyled content when the stylesheets load from <body>. The script
+        # fails the build once typst starts doing this on its own.
         buildPhase = ''
           runHook preBuild
           mkdir -p "$out"
           typst "''${typstArgs[@]}" --features html,bundle "$out/"
+          ${pkgs.lib.getExe pkgs.python3} ${./tools/hoist-head.py} "$out"
           mkdir -p "$out/fonts"
           cp ${webFonts}/* "$out/fonts/"
           cp ${resumeDocs}/* "$out/"
@@ -93,13 +98,29 @@
         pkgs.writeShellApplication {
           name = "site-${name}";
           runtimeInputs = [ site.typst-wrapped ];
-          text = ''
-            mkdir -p build/fonts
-            cp -f ${webFonts}/* build/fonts/
-            cp -f ${resumeDocs}/* build/
-            exec typst ${verb} --features html,bundle --format bundle \
-              --ignore-system-fonts src/main.typ build/
-          '';
+          text =
+            ''
+              mkdir -p build/fonts
+              cp -f ${webFonts}/* build/fonts/
+              cp -f ${resumeDocs}/* build/
+            ''
+            # watch never exits and rewrites pages on every change, so the
+            # head hoist (see buildPhase) can't run here: dev pages keep
+            # typst's in-body tags. Harmless — only the Firefox unstyled
+            # flash fix is missing from the live loop.
+            + (
+              if verb == "watch" then
+                ''
+                  exec typst watch --features html,bundle --format bundle \
+                    --ignore-system-fonts src/main.typ build/
+                ''
+              else
+                ''
+                  typst compile --features html,bundle --format bundle \
+                    --ignore-system-fonts src/main.typ build/
+                  ${pkgs.lib.getExe pkgs.python3} ${./tools/hoist-head.py} build/
+                ''
+            );
         };
     in
     {

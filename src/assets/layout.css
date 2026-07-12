@@ -18,10 +18,11 @@ html {
   }
 }
 
-/* Anchor targets: <section id> in the mockup, labeled headings
-   (<h2 id>) in the Typst build. */
+/* Anchor targets: <section id> in the mockup, labeled headings and
+   TOC-anchored section headings (<h2 id>/<h3 id>) in the Typst build. */
 section,
-h2[id] {
+h2[id],
+h3[id] {
   scroll-margin-top: 2rem;
 }
 
@@ -193,6 +194,18 @@ body {
 
 .nav-group a {
   color: var(--subtle);
+}
+
+/* ---- On this page (per-page TOC) ---- */
+
+/* Post pages add a nav-group listing their own section headings; sub-
+   sections (h3s) hang under their section like the Projects sub-list. */
+.page-toc ul ul {
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+  padding-left: 1rem;
+  border-left: 1px dashed var(--muted);
+  gap: 0.35rem;
 }
 
 /* ---- Mobile header (hidden on desktop) ---- */

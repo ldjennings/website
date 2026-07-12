@@ -171,7 +171,7 @@
   ),
 )
 
-#webpage("index.html", title: [Liam Jennings])[
+#webpage("index.html", title: [Liam Jennings], toc: false)[
   #html.h1(class: "page-title")[
     Robotics Engineer #html.span(class: "title-sep")[|] Embedded Systems & Software
   ]
