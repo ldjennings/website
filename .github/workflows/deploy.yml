@@ -3,10 +3,6 @@ name: deploy
 on:
   push:
     branches: [main]
-  # Sent by the Resume repo's CI after it publishes a new resume; the job
-  # bumps the flake input first so the rebuild picks the new sheet up.
-  repository_dispatch:
-    types: [resume-updated]
   workflow_dispatch:
 
 # One deploy at a time; a newer run supersedes an in-flight one.
@@ -36,8 +32,11 @@ jobs:
 
       - uses: DeterminateSystems/nix-installer-action@v16
 
+      # The Resume repo's CI pushes an empty commit with exactly this
+      # message after publishing a new sheet (its deploy key can push but
+      # not call the API, so a marker commit stands in for a dispatch).
       - name: Bump resume input
-        if: github.event_name == 'repository_dispatch'
+        if: github.event.head_commit.message == 'resume: rebuild'
         run: |
           nix flake update resume
           if ! git diff --quiet flake.lock; then

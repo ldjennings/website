@@ -71,17 +71,22 @@ push to main. Repo plumbing it depends on:
 - `RESUME_SSH_KEY` repo secret: private half of a read-only deploy key on
   the Resume repo, so CI can fetch the private flake input.
 
-Resume updates: the Resume repo's CI sends a `repository_dispatch` (event
-type `resume-updated`) after publishing a new sheet; the deploy workflow
-then runs `nix flake update resume`, commits the lockfile bump, and
-redeploys. The sending side needs a fine-grained PAT for this repo (stored
-in the Resume repo's secrets) and a step like:
+Resume updates: after publishing a new sheet, the Resume repo's CI pushes
+an empty commit with the exact message `resume: rebuild` to this repo's
+main (using the write deploy key it already holds from the old
+push-the-PDF flow — deploy keys can push but can't call the API, so a
+marker commit stands in for a `repository_dispatch`). The deploy workflow
+reacts by running `nix flake update resume`, committing the lockfile bump,
+and deploying. Sending side, with the deploy key already loaded:
 
 ```yaml
 - name: Trigger website rebuild
-  env:
-    GH_TOKEN: ${{ secrets.WEBSITE_DISPATCH_TOKEN }}
-  run: gh api repos/ldjennings/website/dispatches -f event_type=resume-updated
+  run: |
+    git clone --depth 1 git@github.com:ldjennings/website.git
+    git -C website -c user.name="github-actions[bot]" \
+      -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+      commit --allow-empty -m "resume: rebuild"
+    git -C website push
 ```
 
 ## Caveats
