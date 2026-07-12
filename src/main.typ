@@ -18,6 +18,11 @@
 #asset("layout.css", read("assets/layout.css"))
 #asset("theme.css", read("assets/theme.css"))
 
+// The typeset resume sheet, committed here by the Resume repo's CI
+// whenever a new one is published (see README, Deployment).
+#asset("resume.pdf", read("assets/resume.pdf", encoding: none))
+#asset("resume.svg", read("assets/resume.svg", encoding: none))
+
 #for f in (
   "logo.jpg",
   "real-motion.png",

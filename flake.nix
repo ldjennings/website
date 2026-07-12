@@ -4,13 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     press.url = "github:RossSmyth/press";
-    # Private repo, fetched over SSH. After pushing resume changes, run
-    # `nix flake update resume` to pull them into the site.
-    resume.url = "git+ssh://git@github.com/ldjennings/Resume";
   };
 
   outputs =
-    { self, nixpkgs, press, resume }:
+    { self, nixpkgs, press }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -19,14 +16,6 @@
       };
 
       fs = pkgs.lib.fileset;
-
-      # The resume flake exports a dated PDF + SVG pair; the site serves
-      # them under stable names (resume.pdf download, resume.svg sheet).
-      resumeDocs = pkgs.runCommand "site-resume" { } ''
-        mkdir -p "$out"
-        cp ${resume.packages.${system}.default}/*.pdf "$out/resume.pdf"
-        cp ${resume.packages.${system}.default}/*.svg "$out/resume.svg"
-      '';
 
       # The webfont files theme.css declares @font-face for, taken verbatim
       # from the pinned packages and served next to the pages as fonts/.
@@ -84,7 +73,6 @@
           ${pkgs.lib.getExe pkgs.python3} ${./tools/hoist-head.py} "$out"
           mkdir -p "$out/fonts"
           cp ${webFonts}/* "$out/fonts/"
-          cp ${resumeDocs}/* "$out/"
           runHook postBuild
         '';
       };
@@ -102,7 +90,6 @@
             ''
               mkdir -p build/fonts
               cp -f ${webFonts}/* build/fonts/
-              cp -f ${resumeDocs}/* build/
             ''
             # watch never exits and rewrites pages on every change, so the
             # head hoist (see buildPhase) can't run here: dev pages keep

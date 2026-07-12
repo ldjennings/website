@@ -37,13 +37,13 @@ stagecraft-themed:
 | Pages | `src/pages/*.typ`, `src/pages/posts/*.typ` | one file per webpage; each calls `webpage(path, title: ..)[content]`. Write-up sources sit in `pages/posts/`, mirroring their `posts/` paths in the bundle — `webpage()` derives the `../` prefix for chrome assets from the path |
 | Staging | `src/main.typ` | `#include`s every page and `#asset`s the shared static files |
 
-The resume comes in as a flake input (`github.com/ldjennings/Resume`,
-fetched over SSH — it's private): its exported PDF + SVG are copied into
-the bundle as `resume.pdf` / `resume.svg`, and `src/pages/resume.typ`
-frames the SVG sheet in the site chrome with a PDF download button. (An
-HTML-text edition of the CV was tried and rejected — the typeset sheet
-looks better and has no content drift.) After pushing resume changes,
-run `nix flake update resume`.
+The resume sheet lives at `src/assets/resume.{pdf,svg}`, committed here
+by the (private) Resume repo's CI whenever a new one is published — see
+Deployment below. `src/main.typ` bundles the pair as `resume.pdf` /
+`resume.svg`, and `src/pages/resume.typ` frames the SVG sheet in the site
+chrome with a PDF download button. (An HTML-text edition of the CV was
+tried and rejected — the typeset sheet looks better and has no content
+drift.)
 
 The design itself (layout, theme, decisions log) was settled in
 `design/mockup/` — see `design/README.md`. Webfont files are copied from
@@ -63,29 +63,26 @@ actually referenced somewhere.
 
 `.github/workflows/deploy.yml` builds the site with nix (including the
 `nix flake check` link audit) and publishes it to GitHub Pages on every
-push to main. Repo plumbing it depends on:
+push to main. No repo secrets needed; the only setting is Pages deploying
+from **GitHub Actions** (Settings → Pages → Build and deployment), with
+the custom domain configured there — no `CNAME` file needed under Actions
+deploys.
 
-- Pages must be set to deploy from **GitHub Actions** (Settings → Pages →
-  Build and deployment), with the custom domain configured there — no
-  `CNAME` file needed under Actions deploys.
-- `RESUME_SSH_KEY` repo secret: private half of a read-only deploy key on
-  the Resume repo, so CI can fetch the private flake input.
-
-Resume updates: after publishing a new sheet, the Resume repo's CI pushes
-an empty commit with the exact message `resume: rebuild` to this repo's
-main (using the write deploy key it already holds from the old
-push-the-PDF flow — deploy keys can push but can't call the API, so a
-marker commit stands in for a `repository_dispatch`). The deploy workflow
-reacts by running `nix flake update resume`, committing the lockfile bump,
-and deploying. Sending side, with the deploy key already loaded:
+Resume updates: after publishing a new sheet, the Resume repo's CI
+commits it to `src/assets/resume.{pdf,svg}` here (using the write deploy
+key it holds from the old Jekyll-era flow), and the resulting push
+deploys like any other. Sending side, with the deploy key loaded and the
+built sheet in `out/`:
 
 ```yaml
-- name: Trigger website rebuild
+- name: Push the new sheet to the website
   run: |
     git clone --depth 1 git@github.com:ldjennings/website.git
+    cp out/*.pdf website/src/assets/resume.pdf
+    cp out/*.svg website/src/assets/resume.svg
     git -C website -c user.name="github-actions[bot]" \
       -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-      commit --allow-empty -m "resume: rebuild"
+      commit -am "resume: update sheet"
     git -C website push
 ```
 
