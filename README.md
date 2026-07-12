@@ -1,11 +1,13 @@
-# typst-bundle-test
+# website
 
-Experiment: building a personal website with [Typst's experimental bundle
+Personal website ([jenningsliamd.me](https://jenningsliamd.me)), built with
+[Typst's experimental bundle
 export](https://typst.app/docs/reference/html/) (typst 0.15, `--features
-html,bundle`), instead of a conventional static site generator. The sidebar
+html,bundle`) instead of a conventional static site generator. The sidebar
 layout is modeled on [web.youwen.dev](https://web.youwen.dev/)
 ([source](https://github.com/youwen5/web)), which does the same thing with a
-custom Hakyll setup.
+custom Hakyll setup. It replaces the previous Jekyll site, which lives on
+in this repo's history.
 
 ## Usage
 
@@ -56,6 +58,31 @@ to relative hrefs, including fragments (a labeled heading like
 The nav in `dressing.typ` accepts either labels or URL strings as
 destinations. Note: typst only emits an element id when its label is
 actually referenced somewhere.
+
+## Deployment
+
+`.github/workflows/deploy.yml` builds the site with nix (including the
+`nix flake check` link audit) and publishes it to GitHub Pages on every
+push to main. Repo plumbing it depends on:
+
+- Pages must be set to deploy from **GitHub Actions** (Settings → Pages →
+  Build and deployment), with the custom domain configured there — no
+  `CNAME` file needed under Actions deploys.
+- `RESUME_SSH_KEY` repo secret: private half of a read-only deploy key on
+  the Resume repo, so CI can fetch the private flake input.
+
+Resume updates: the Resume repo's CI sends a `repository_dispatch` (event
+type `resume-updated`) after publishing a new sheet; the deploy workflow
+then runs `nix flake update resume`, commits the lockfile bump, and
+redeploys. The sending side needs a fine-grained PAT for this repo (stored
+in the Resume repo's secrets) and a step like:
+
+```yaml
+- name: Trigger website rebuild
+  env:
+    GH_TOKEN: ${{ secrets.WEBSITE_DISPATCH_TOKEN }}
+  run: gh api repos/ldjennings/website/dispatches -f event_type=resume-updated
+```
 
 ## Caveats
 

@@ -1,0 +1,64 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  # Sent by the Resume repo's CI after it publishes a new resume; the job
+  # bumps the flake input first so the rebuild picks the new sheet up.
+  repository_dispatch:
+    types: [resume-updated]
+  workflow_dispatch:
+
+# One deploy at a time; a newer run supersedes an in-flight one.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: write # pushing the flake.lock bump
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # The resume flake input is a private repo fetched over SSH (see
+      # flake.nix); RESUME_SSH_KEY is a read-only deploy key on it.
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.RESUME_SSH_KEY }}
+
+      - uses: DeterminateSystems/nix-installer-action@v16
+
+      - name: Bump resume input
+        if: github.event_name == 'repository_dispatch'
+        run: |
+          nix flake update resume
+          if ! git diff --quiet flake.lock; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "resume: bump flake input" flake.lock
+            git push
+          fi
+
+      # Builds the site and audits it for dead links; `nix build` after it
+      # only instantiates the result/ symlink from the store.
+      - name: Build and audit
+        run: |
+          nix flake check
+          nix build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: result
+
+      - uses: actions/deploy-pages@v4
+        id: deployment
