@@ -27,6 +27,20 @@
   ("About", <about>),
 )
 
+// Every write-up, oldest first: (file stem, footer-nav title). Drives the
+// older/newer footer chain on each post (post-nav in post.typ) — adding a
+// post here threads it into its neighbors automatically.
+#let post-chain = (
+  ("maze-robot", "Maze-Solving ROMI Robots"),
+  ("reinforcement-learning", "Reinforcement Learning in ROS"),
+  ("deraining", "Single Image Deraining"),
+  ("robot-arm", "3-DOF Robot Arm"),
+  ("quadrotor", "Quadrotor Interception"),
+  ("formula-electric", "Formula Electric"),
+  ("symbotic", "Symbotic Co-op"),
+  ("motion-planning", "Motion Planning"),
+)
+
 // (group title, ((text, dest), ...))
 #let nav-groups = (
   ("Elsewhere", (

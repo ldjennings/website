@@ -63,3 +63,13 @@
   html.time(datetime: date, date.display("[year]-[month]-[day]"))
   html.a(class: "row-link", href: href, aria-hidden: true, tabindex: -1)
 })
+
+// The two landing-page sections, each taking an array of argument dicts
+// for the element above.
+#let project-grid(projects) = html.div(class: "project-grid", {
+  for p in projects { project-card(..p) }
+})
+
+#let article-list(articles) = html.ul(class: "article-list", {
+  for a in articles { article-row(..a) }
+})

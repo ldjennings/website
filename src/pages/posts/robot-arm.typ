@@ -12,7 +12,6 @@
   #post(..meta)[
     = Overview
 
-
     For RBE 501 (Robot Dynamics) at WPI, our team designed a 3-DOF planar
     robot arm capable of moving a 500 g payload between three defined
     positions. The course project required kinematic analysis, CAD
@@ -28,7 +27,6 @@
 
     = Kinematic Design
 
-
     We designed a planar arm with link lengths of 10 cm, 10 cm, and 5 cm.
     Forward kinematics were computed using the Product of Exponentials
     (PoE) formulation, while inverse kinematics used a geometric approach
@@ -40,7 +38,6 @@
 
     = Trajectory Generation
 
-
     Smooth trajectories were generated using quintic polynomials in joint
     space. The polynomial coefficients were computed to satisfy
     constraints on position, velocity, and acceleration at the start and
@@ -48,7 +45,6 @@
     at rest positions.
 
     = Dynamics and Motor Selection
-
 
     We analyzed joint torques using the Recursive Newton-Euler (RNE)
     algorithm, computing both gravity compensation and inertial torques
@@ -61,7 +57,6 @@
 
     = What I Learned
 
-
     This project gave me hands-on experience connecting theoretical
     robotics concepts to physical hardware. Deriving kinematics and
     dynamics by hand, then validating them against a real system,
@@ -72,9 +67,6 @@
 
     #btn(([View full report ↓], "../docs/robot-arm-report.pdf"))
 
-    #post-nav(
-      prev: ([single image deraining], "deraining.html"),
-      next: ([quadrotor interception], "quadrotor.html"),
-    )
+    #post-nav("robot-arm")
   ]
 ] <robot-arm>

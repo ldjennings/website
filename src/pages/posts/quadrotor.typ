@@ -12,7 +12,6 @@
   #post(..meta)[
     = Overview
 
-
     As part of the "Nonlinear Control of Robotic Systems" course at WPI,
     our team developed and simulated a quadrotor control system capable
     of autonomously intercepting a UAV within a bounded airspace. We
@@ -24,9 +23,8 @@
 
     = Problem
 
-
     The challenge was to ensure a quadrotor could track, intercept, and
-    return with an intruding UAV in a 10$times$10$times$10 m airspace. The vehicle
+    return with an intruding UAV in a 10 × 10 × 10 m airspace. The vehicle
     had to autonomously detect the target's position, predict its motion,
     and perform interception while maintaining stability even under
     disturbances introduced during capture.
@@ -37,7 +35,6 @@
     control four of the six degrees of freedom.
 
     = Solution
-
 
     We modeled the quadrotor dynamics and derived individual SMC laws for
     altitude and orientation control. Sliding Mode Control was chosen for
@@ -70,7 +67,6 @@
 
     = What I Learned
 
-
     This project deepened my understanding of nonlinear control systems,
     especially in handling underactuated aerial vehicles. Designing the
     SMC and trajectory prediction taught me how small modeling and tuning
@@ -82,9 +78,6 @@
 
     #btn(([View on GitHub ↗], "https://github.com/ldjennings/RBE502Quadrotor"))
 
-    #post-nav(
-      prev: ([3-dof robot arm], "robot-arm.html"),
-      next: ([formula electric], "formula-electric.html"),
-    )
+    #post-nav("quadrotor")
   ]
 ] <quadrotor>

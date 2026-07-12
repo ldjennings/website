@@ -1,9 +1,9 @@
-#import "../lib/skeleton.typ": webpage
+#import "../lib/skeleton.typ": webpage, page-title
 #import "../lib/post.typ": btn
 
 // Bio carried over from the previous site's homepage.
 #webpage("about.html", title: [About])[
-  #html.h1(class: "page-title")[About]
+  #page-title[About]
 
   My work focuses on embedded systems, real-time controls, and hardware
   validation. I have hands-on experience with STM32 firmware development,

@@ -12,7 +12,6 @@
   #post(..meta)[
     = Overview
 
-
     During our time in the "Unified Robotics: Sensing" course, we worked
     closely with Pololu ROMI robots, featuring Atmega32U4 embedded
     control boards, to delve deep into the field of robotic sensing. The
@@ -25,7 +24,6 @@
 
     = Problem
 
-
     As we approached our final project, we were met with the challenging
     task of combining all that we had learned to enable our robots to
     autonomously navigate a random maze. All members of our team, in
@@ -37,7 +35,6 @@
     became a substantial barrier to housing our ambitious project.
 
     = Solution
-
 
     To circumvent the memory issue, we devised a strategy to shift the
     higher-level logic to the ESP-32, maintaining communication with the
@@ -57,7 +54,6 @@
 
     = What I Learned
 
-
     This project was an enriching learning experience that extended
     beyond just robotics. We navigated challenges tied to resource
     optimization and networking, gaining a deeper appreciation for the
@@ -67,8 +63,6 @@
     ambition with feasibility, steering our project to a successful
     completion.
 
-    #post-nav(
-      next: ([reinforcement learning in ros], "reinforcement-learning.html"),
-    )
+    #post-nav("maze-robot")
   ]
 ] <maze-robot>

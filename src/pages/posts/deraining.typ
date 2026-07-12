@@ -19,7 +19,6 @@
 
     = Project Motivation
 
-
     Gently watching raindrops roll down the window provides a calming and
     serene experience, but when driving, rain can impede clarity, even
     with reliable windshield wipers. In an increasingly automated world
@@ -32,7 +31,6 @@
     adverse weather conditions as if they were clear skies.
 
     = Existing Image Filtering Approaches
-
 
     Image filtering, a method that modifies pixel values, is commonly
     used in deraining, deblurring, and other similar image restoration
@@ -57,7 +55,6 @@
     support vector machines, and random forests.
 
     = Challenges
-
 
     The task of single image deraining comes with some challenges: One is
     dealing with the variety of rain features found in real-world
@@ -86,7 +83,6 @@
     blurs on glass, such as a car windshield or camera lens.
 
     = Convolutional Variational Autoencoder (CVAE) Architecture
-
 
     The proposed solution that we implemented is a Convolutional
     Variational Autoencoder. The architecture is as follows:
@@ -144,7 +140,6 @@
 
     = Dataset
 
-
     We used
     #link("https://drive.google.com/drive/folders/1e7R76s6vwUJxILOcAsthgDLPSnOrQ49K")[this dataset]
     of 861 rain-free and rain image pairs for training. This dataset was
@@ -163,20 +158,17 @@
 
     = Example of Training Result
 
-
     #fig("derain_training.jpg",
       [Clean original, rain-degraded input, and the model's reconstruction],
       alt: "Clean image, rainy image, and blurry CVAE reconstruction side by side")
 
     = Example of Testing Result
 
-
     #fig("derain_testing.jpg",
       [Reconstructions of held-out test images],
       alt: "Three unrecognizable CVAE reconstructions of test images")
 
     = Conclusions
-
 
     The model performed somewhat successfully in training. It input
     images, identified significant hierarchal features of colored images,
@@ -202,7 +194,6 @@
 
     = References
 
-
     - Wang, T., Yang, X., Xu, K., Chen, S., Zhang, Q., & Lau, R.
       "Spatial Attentive Single-Image Deraining with a High Quality Real
       Rain Dataset", CVPR 2019.
@@ -223,9 +214,6 @@
       by Google Street View that were piped through the raindrop
       generator
 
-    #post-nav(
-      prev: ([reinforcement learning in ros], "reinforcement-learning.html"),
-      next: ([3-dof robot arm], "robot-arm.html"),
-    )
+    #post-nav("deraining")
   ]
 ] <deraining>

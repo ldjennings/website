@@ -12,14 +12,12 @@
   #post(..meta)[
     = Overview
 
-
     For our end-of-semester project in the Artificial Intelligence class,
     my group and I found ourselves gravitating towards the field of
     reinforcement learning, a domain that aligned well with our studies
     in robotics.
 
     = Problem
-
 
     While intrigued by the practical applications of reinforcement
     learning in robotics, we faced the potential hurdle of time and
@@ -29,7 +27,6 @@
     of the project.
 
     = Solution
-
 
     Opting for a practical and time-efficient approach, we decided to
     work with ROS's Gazebo simulator and the TurtleBot library to
@@ -51,7 +48,6 @@
 
     = What I Learned
 
-
     This project was a nice dip into the world of artificial intelligence
     and reinforcement learning. Utilizing a simulation instead of a
     physical robot allowed us to streamline the project, helping us save
@@ -62,9 +58,6 @@
     good starting point for future projects applying reinforcement
     learning in a robotics context.
 
-    #post-nav(
-      prev: ([maze-solving romi robots], "maze-robot.html"),
-      next: ([single image deraining], "deraining.html"),
-    )
+    #post-nav("reinforcement-learning")
   ]
 ] <reinforcement-learning>

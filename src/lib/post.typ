@@ -3,6 +3,8 @@
 // markup — headings, lists, raw blocks, and quotes compile to the elements
 // the .post CSS targets; the helpers below cover the classed pieces.
 
+#import "dressing.typ": post-chain
+
 // Captioned image. Branches on export target so the same post body can
 // feed both the HTML page and its PDF twin. Posts live in posts/, hence
 // the ../ back to the bundle's img/.
@@ -43,21 +45,29 @@
   }
 })
 
-// Older/newer footer navigation. prev/next: (label, href) or none.
-#let post-nav(prev: none, next: none) = html.nav(class: "post-nav", {
-  if prev != none {
-    html.a(class: "prev", href: prev.at(1), {
-      html.span(class: "post-nav-label", "← older")
-      prev.at(0)
-    })
-  }
-  if next != none {
-    html.a(class: "next", href: next.at(1), {
-      html.span(class: "post-nav-label", "newer →")
-      next.at(0)
-    })
-  }
-})
+// Older/newer footer navigation, derived from post-chain: pass the post's
+// own file stem and its neighbors in the chain are linked (posts are all
+// siblings in posts/, so a stem + ".html" is the href).
+#let post-nav(name) = {
+  let i = post-chain.position(p => p.at(0) == name)
+  assert(i != none, message: name + " is missing from post-chain (dressing.typ)")
+  html.nav(class: "post-nav", {
+    if i > 0 {
+      let (stem, title) = post-chain.at(i - 1)
+      html.a(class: "prev", href: stem + ".html", {
+        html.span(class: "post-nav-label", "← older")
+        title
+      })
+    }
+    if i < post-chain.len() - 1 {
+      let (stem, title) = post-chain.at(i + 1)
+      html.a(class: "next", href: stem + ".html", {
+        html.span(class: "post-nav-label", "newer →")
+        title
+      })
+    }
+  })
+}
 
 #let post(
   category: "",

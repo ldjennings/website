@@ -12,14 +12,12 @@
   #post(..meta)[
     = Overview
 
-
     For RBE 550 (Motion Planning) at WPI, I completed three major projects
     exploring different aspects of motion planning algorithms. I took the
     opportunity to go overboard with the technical reports, focusing on
     clear explanations and thorough documentation.
 
     = Project Reports
-
 
     == Valet: Hybrid A\* for Multiple Vehicle Types
 
@@ -48,15 +46,12 @@
 
     = What I Learned
 
-
     These projects gave me practice implementing and comparing different
     planning algorithms — from basic graph search to RRTs and
     optimization-based methods. Writing detailed reports forced me to
     really understand the tradeoffs between approaches and communicate
     them clearly.
 
-    #post-nav(
-      prev: ([symbotic co-op], "symbotic.html"),
-    )
+    #post-nav("motion-planning")
   ]
 ] <motion-planning>

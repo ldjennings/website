@@ -1,5 +1,5 @@
-#import "../lib/skeleton.typ": webpage
-#import "../lib/cards.typ": project-card, article-row
+#import "../lib/skeleton.typ": webpage, page-title
+#import "../lib/cards.typ": project-grid, article-list
 
 // Write-up pages, all local under posts/.
 #let up = (
@@ -172,7 +172,7 @@
 )
 
 #webpage("index.html", title: [Liam Jennings], toc: false)[
-  #html.h1(class: "page-title")[
+  #page-title[
     Robotics Engineer #html.span(class: "title-sep")[|] Embedded Systems & Software
   ]
   #html.p(class: "intro")[I'm Liam — based in Seattle, currently pursuing
@@ -182,18 +182,12 @@
 
   = Showcased Projects <projects>
 
-  // #html.p(class: "section-lede")[A hand-picked cut of my work — each card
-  //   links to a full write-up.]
-
-  #html.div(class: "project-grid")[
-    #for p in projects { project-card(..p) }
-  ]
+  #project-grid(projects)
 
   = Writing <writing>
 
-  #html.p(class: "section-lede")[Every write-up on the site, including the showcased projects above.]
+  #html.p(class: "section-lede")[Every write-up on the site, including the
+    showcased projects above.]
 
-  #html.ul(class: "article-list")[
-    #for a in articles { article-row(..a) }
-  ]
+  #article-list(articles)
 ] <home>

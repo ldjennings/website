@@ -12,14 +12,12 @@
   #post(..meta)[
     = Overview
 
-
     From July to December 2025, I worked as a Hardware Test Engineering
     Co-op at #link("https://www.symbotic.com/")[Symbotic] in Boston.
     Symbotic builds autonomous warehouse robotics systems for large-scale
     logistics operations.
 
     = What I Did
-
 
     I owned end-to-end execution of hardware validation tests for
     embedded and electromechanical subsystems — developing test
@@ -41,16 +39,12 @@
 
     = What I Learned
 
-
     This role gave me experience working on hardware validation at
     scale — where test reliability and documentation matter as much as
     the test results themselves. Building tooling that other engineers
     depend on reinforced the importance of writing maintainable code with
     proper tests and version control, even for internal tools.
 
-    #post-nav(
-      prev: ([formula electric], "formula-electric.html"),
-      next: ([motion planning], "motion-planning.html"),
-    )
+    #post-nav("symbotic")
   ]
 ] <symbotic>

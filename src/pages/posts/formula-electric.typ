@@ -14,7 +14,6 @@
 #let body = [
   = Overview
 
-
   As part of WPI's Formula Electric team for the 2024–2025 season,
   I designed and validated embedded electronics for our competition
   vehicle. My work spanned PCB design, firmware development, and system
@@ -24,7 +23,6 @@
     alt: "The WPI Formula Electric 2025 car on track")
 
   = Inverter Controller Board
-
 
   The inverter controller serves as the interface between the pedal
   assembly and the motor controller. It reads analog signals from the
@@ -61,7 +59,6 @@
 
   = Driver Radio Board
 
-
   I designed a Bluetooth-based radio system for live telemetry and
   driver-ground communication. The second revision addressed issues from
   the initial prototype and added an SD card for local data logging.
@@ -71,7 +68,6 @@
 
   = Pedalbox Integration
 
-
   Beyond PCB design, I worked on integrating the electronics with the
   mechanical pedal assembly, routing wiring harnesses and verifying
   sensor signals with oscilloscope measurements.
@@ -80,7 +76,6 @@
     alt: "Assembled pedalbox with sensors and wiring")
 
   = What I Learned
-
 
   This project gave me end-to-end experience with embedded hardware
   development — from schematic capture and PCB layout through board
@@ -102,10 +97,7 @@
       ([Download as PDF ↓], "formula-electric.pdf"),
     )
 
-    #post-nav(
-      prev: ([quadrotor interception], "quadrotor.html"),
-      next: ([symbotic co-op], "symbotic.html"),
-    )
+    #post-nav("formula-electric")
   ]
 ] <formula-electric>
 

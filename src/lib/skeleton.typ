@@ -35,6 +35,10 @@
   html.span(class: "brand-name", site-name)
 })
 
+// The page's <h1>: standalone pages carry one of these instead of the
+// .post header (markup headings start at <h2> — see anchored() below).
+#let page-title(body) = html.h1(class: "page-title", body)
+
 // Label destinations go through native link() so the bundle export
 // resolves them; URL strings become plain anchors.
 #let nav-link(text, dest) = if type(dest) == label {
