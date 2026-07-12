@@ -68,23 +68,10 @@ from **GitHub Actions** (Settings → Pages → Build and deployment), with
 the custom domain configured there — no `CNAME` file needed under Actions
 deploys.
 
-Resume updates: after publishing a new sheet, the Resume repo's CI
-commits it to `src/assets/resume.{pdf,svg}` here (using the write deploy
-key it holds from the old Jekyll-era flow), and the resulting push
-deploys like any other. Sending side, with the deploy key loaded and the
-built sheet in `out/`:
-
-```yaml
-- name: Push the new sheet to the website
-  run: |
-    git clone --depth 1 git@github.com:ldjennings/website.git
-    cp out/*.pdf website/src/assets/resume.pdf
-    cp out/*.svg website/src/assets/resume.svg
-    git -C website -c user.name="github-actions[bot]" \
-      -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-      commit -am "resume: update sheet"
-    git -C website push
-```
+Resume updates: pushing the Resume repo's `website` branch runs its
+`publish.yml`, which builds the sheet and commits it here as
+`src/assets/resume.{pdf,svg}` (over the write deploy key it holds, as in
+the Jekyll era) — and that push deploys like any other.
 
 ## Caveats
 
