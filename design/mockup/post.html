@@ -31,16 +31,16 @@
         <li><a href="https://jenningsliamd.me/work/2025/12/15/symbotic/">symbotic co-op</a></li>
       </ul>
     </div>
-    <div class="nav-group page-toc">
-      <p class="nav-group-title">on this page</p>
+    <details class="nav-group page-toc" open>
+      <summary class="nav-group-title">On this page</summary>
       <ul>
-        <li><a href="#overview">overview</a></li>
-        <li><a href="#inverter-controller-board">inverter controller board</a></li>
-        <li><a href="#driver-radio-board">driver radio board</a></li>
-        <li><a href="#pedalbox-integration">pedalbox integration</a></li>
-        <li><a href="#what-i-learned">what i learned</a></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#inverter-controller-board">Inverter controller board</a></li>
+        <li><a href="#driver-radio-board">Driver radio board</a></li>
+        <li><a href="#pedalbox-integration">Pedalbox integration</a></li>
+        <li><a href="#what-i-learned">What I learned</a></li>
       </ul>
-    </div>
+    </details>
     <div class="nav-group">
       <p class="nav-group-title">elsewhere</p>
       <ul>
@@ -65,16 +65,16 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#writing">Blog</a></li>
         </ul>
-        <div class="nav-group page-toc">
-          <p class="nav-group-title">on this page</p>
+        <details class="nav-group page-toc" open>
+          <summary class="nav-group-title">On this page</summary>
           <ul>
-            <li><a href="#overview">overview</a></li>
-            <li><a href="#inverter-controller-board">inverter controller board</a></li>
-            <li><a href="#driver-radio-board">driver radio board</a></li>
-            <li><a href="#pedalbox-integration">pedalbox integration</a></li>
-            <li><a href="#what-i-learned">what i learned</a></li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#inverter-controller-board">Inverter controller board</a></li>
+            <li><a href="#driver-radio-board">Driver radio board</a></li>
+            <li><a href="#pedalbox-integration">Pedalbox integration</a></li>
+            <li><a href="#what-i-learned">What I learned</a></li>
           </ul>
-        </div>
+        </details>
       </nav>
     </details>
   </header>
@@ -87,7 +87,7 @@
         <ul class="tags"><li>stm32</li><li>can</li><li>pcb</li></ul>
       </header>
 
-      <h2 id="overview">overview</h2>
+      <h2 id="overview">Overview</h2>
       <p>As part of WPI's Formula Electric team for the 2024–2025 season,
       I designed and validated embedded electronics for our competition
       vehicle. My work spanned PCB design, firmware development, and
@@ -98,7 +98,7 @@
         <figcaption>WPI Formula Electric 2025 vehicle</figcaption>
       </figure>
 
-      <h2 id="inverter-controller-board">inverter controller board</h2>
+      <h2 id="inverter-controller-board">Inverter controller board</h2>
       <p>The inverter controller serves as the interface between the pedal
       assembly and the motor controller. It reads analog signals from the
       throttle and brake pedals, processes them through an STM32
@@ -133,7 +133,7 @@ if (!plausible(apps1, apps2)) {
     implausible_ms = 0;
 }</code></pre>
 
-      <h2 id="driver-radio-board">driver radio board</h2>
+      <h2 id="driver-radio-board">Driver radio board</h2>
       <p>I designed a Bluetooth-based radio system for live telemetry and
       driver–ground communication. The second revision addressed issues
       from the initial prototype and added an SD card for local data
@@ -144,7 +144,7 @@ if (!plausible(apps1, apps2)) {
         <figcaption>Driver radio board, rev 2</figcaption>
       </figure>
 
-      <h2 id="pedalbox-integration">pedalbox integration</h2>
+      <h2 id="pedalbox-integration">Pedalbox integration</h2>
       <p>Beyond PCB design, I worked on integrating the electronics with
       the mechanical pedal assembly, routing wiring harnesses and
       verifying sensor signals with oscilloscope measurements.</p>
@@ -154,7 +154,7 @@ if (!plausible(apps1, apps2)) {
         <figcaption>Assembled pedalbox</figcaption>
       </figure>
 
-      <h2 id="what-i-learned">what i learned</h2>
+      <h2 id="what-i-learned">What I learned</h2>
       <p>This project gave me end-to-end experience with embedded hardware
       development — from schematic capture and PCB layout through board
       bring-up, firmware debugging, and system validation. Debugging

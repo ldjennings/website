@@ -198,8 +198,36 @@ body {
 
 /* ---- On this page (per-page TOC) ---- */
 
-/* Post pages add a nav-group listing their own section headings; sub-
-   sections (h3s) hang under their section like the Projects sub-list. */
+/* Pages with headings add a nav-group listing their own sections; sub-
+   sections (h3s) hang under their section like the Projects sub-list.
+   The whole group is a <details> — same caret as .nav-expand — but
+   starts open: the current page's sections are the most useful links. */
+.page-toc summary {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.page-toc summary::-webkit-details-marker {
+  display: none;
+}
+
+.page-toc summary::after {
+  content: "";
+  width: 0.4em;
+  height: 0.4em;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(-45deg);
+  transition: transform 0.15s;
+}
+
+.page-toc[open] summary::after {
+  transform: rotate(45deg);
+}
+
 .page-toc ul ul {
   font-size: 0.9rem;
   margin-top: 0.35rem;

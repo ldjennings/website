@@ -10,16 +10,18 @@
 
 #webpage("posts/motion-planning.html", title: meta.title)[
   #post(..meta)[
-    = overview
+    = Overview
+
 
     For RBE 550 (Motion Planning) at WPI, I completed three major projects
     exploring different aspects of motion planning algorithms. I took the
     opportunity to go overboard with the technical reports, focusing on
     clear explanations and thorough documentation.
 
-    = project reports
+    = Project Reports
 
-    == Valet: Hybrid A\* for multiple vehicle types
+
+    == Valet: Hybrid A\* for Multiple Vehicle Types
 
     Implemented Hybrid A\* search for four vehicle models of increasing
     complexity: holonomic point robot, differential drive, Ackermann car,
@@ -28,7 +30,7 @@
 
     #btn(([Download report ↓], "../docs/valet.pdf"))
 
-    == Wildfire: discrete vs sampling-based planning
+    == Wildfire: Discrete vs Sampling-based Planning
 
     A competitive simulation between two agents: a grid-based "Wumpus"
     using A\* to ignite obstacles, and a firetruck using a PRM with
@@ -36,7 +38,7 @@
 
     #btn(([Download report ↓], "../docs/wildfire.pdf"))
 
-    == Transmission: BiRRT for disassembly planning
+    == Transmission: BiRRT for Disassembly Planning
 
     Used Bidirectional RRT to plan a collision-free removal path for the
     mainshaft of an SM-465 manual transmission, navigating around the
@@ -44,7 +46,8 @@
 
     #btn(([Download report ↓], "../docs/transmission.pdf"))
 
-    = what i learned
+    = What I Learned
+
 
     These projects gave me practice implementing and comparing different
     planning algorithms — from basic graph search to RRTs and

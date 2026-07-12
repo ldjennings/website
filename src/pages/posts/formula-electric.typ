@@ -12,7 +12,8 @@
 // Prose in native Typst markup so the same body feeds the HTML page and
 // its PDF twin below (fig() branches on export target).
 #let body = [
-  = overview
+  = Overview
+
 
   As part of WPI's Formula Electric team for the 2024–2025 season,
   I designed and validated embedded electronics for our competition
@@ -22,7 +23,8 @@
   #fig("real-formula.jpg", [WPI Formula Electric 2025 vehicle],
     alt: "The WPI Formula Electric 2025 car on track")
 
-  = inverter controller board
+  = Inverter Controller Board
+
 
   The inverter controller serves as the interface between the pedal
   assembly and the motor controller. It reads analog signals from the
@@ -57,16 +59,18 @@
   }
   ```
 
-  = driver radio board
+  = Driver Radio Board
+
 
   I designed a Bluetooth-based radio system for live telemetry and
-  driver–ground communication. The second revision addressed issues from
+  driver-ground communication. The second revision addressed issues from
   the initial prototype and added an SD card for local data logging.
 
   #fig("formula_radio_pcb.png", [Driver radio board, rev 2],
     alt: "Driver radio PCB")
 
-  = pedalbox integration
+  = Pedalbox Integration
+
 
   Beyond PCB design, I worked on integrating the electronics with the
   mechanical pedal assembly, routing wiring harnesses and verifying
@@ -75,7 +79,8 @@
   #fig("formula_pedalbox.png", [Assembled pedalbox],
     alt: "Assembled pedalbox with sensors and wiring")
 
-  = what i learned
+  = What I Learned
+
 
   This project gave me end-to-end experience with embedded hardware
   development — from schematic capture and PCB layout through board

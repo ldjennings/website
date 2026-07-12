@@ -86,6 +86,8 @@
 
 // The "on this page" nav group: top-level sections with their
 // sub-sections nested under them; none when the page has no headings.
+// A <details> like the Projects sub-list, but starts expanded — the
+// current page's sections are the most immediately useful links.
 #let toc-group(body) = {
   let groups = ()
   for h in collect-headings(body) {
@@ -97,8 +99,8 @@
     }
   }
   if groups.len() == 0 { return none }
-  html.div(class: "nav-group page-toc", {
-    html.p(class: "nav-group-title", "on this page")
+  html.details(class: "nav-group page-toc", open: true, {
+    html.summary(class: "nav-group-title", "On this page")
     html.ul({
       for (top, subs) in groups {
         html.li({

@@ -180,7 +180,7 @@
     systems, real-time controls, and hardware validation — and I like
     making things well.]
 
-  = showcased projects <projects>
+  = Showcased Projects <projects>
 
   // #html.p(class: "section-lede")[A hand-picked cut of my work — each card
   //   links to a full write-up.]
@@ -189,7 +189,7 @@
     #for p in projects { project-card(..p) }
   ]
 
-  = writing <writing>
+  = Writing <writing>
 
   #html.p(class: "section-lede")[Every write-up on the site, including the showcased projects above.]
 

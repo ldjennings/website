@@ -10,7 +10,8 @@
 
 #webpage("posts/maze-robot.html", title: meta.title)[
   #post(..meta)[
-    = overview
+    = Overview
+
 
     During our time in the "Unified Robotics: Sensing" course, we worked
     closely with Pololu ROMI robots, featuring Atmega32U4 embedded
@@ -22,7 +23,8 @@
 
     #fig("romi.jpg", [One of our ROMIs], alt: "Photo of a ROMI robot")
 
-    = problem
+    = Problem
+
 
     As we approached our final project, we were met with the challenging
     task of combining all that we had learned to enable our robots to
@@ -34,7 +36,8 @@
     exacerbated by our extensive codebase filled with debug statements,
     became a substantial barrier to housing our ambitious project.
 
-    = solution
+    = Solution
+
 
     To circumvent the memory issue, we devised a strategy to shift the
     higher-level logic to the ESP-32, maintaining communication with the
@@ -52,7 +55,8 @@
 
     #btn(([Explore the codebase ↓], "../docs/romi-code.zip"))
 
-    = what i learned
+    = What I Learned
+
 
     This project was an enriching learning experience that extended
     beyond just robotics. We navigated challenges tied to resource

@@ -10,7 +10,8 @@
 
 #webpage("posts/quadrotor.html", title: meta.title)[
   #post(..meta)[
-    = overview
+    = Overview
+
 
     As part of the "Nonlinear Control of Robotic Systems" course at WPI,
     our team developed and simulated a quadrotor control system capable
@@ -21,10 +22,11 @@
 
     #fig("real-quad.png", [Problem setup], alt: "Diagram of the interception problem")
 
-    = problem
+    = Problem
+
 
     The challenge was to ensure a quadrotor could track, intercept, and
-    return with an intruding UAV in a 10×10×10 m airspace. The vehicle
+    return with an intruding UAV in a 10$times$10$times$10 m airspace. The vehicle
     had to autonomously detect the target's position, predict its motion,
     and perform interception while maintaining stability even under
     disturbances introduced during capture.
@@ -34,7 +36,8 @@
     the control problem particularly interesting — we could only directly
     control four of the six degrees of freedom.
 
-    = solution
+    = Solution
+
 
     We modeled the quadrotor dynamics and derived individual SMC laws for
     altitude and orientation control. Sliding Mode Control was chosen for
@@ -65,7 +68,8 @@
     #fig("quadrotor_result.png", [Quadrotor (green) intercepting a UAV (blue)],
       alt: "3D plot of the interception trajectories")
 
-    = what i learned
+    = What I Learned
+
 
     This project deepened my understanding of nonlinear control systems,
     especially in handling underactuated aerial vehicles. Designing the
