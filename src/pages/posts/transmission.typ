@@ -26,7 +26,10 @@
         the enclosure and countershaft semi-transparent.],
       alt: "3D render of the transmission with four mainshaft poses tracing an extraction path up and out of the enclosure")
 
-    #btn(([Full report (PDF) ↓], "../docs/transmission.pdf"))
+    #btn(
+      ([Full report (PDF) ↓], "../docs/transmission.pdf"),
+      ([Explore the codebase ↓], "../docs/transmission-code.zip"),
+    )
 
     = A State Space With a Correctness Guarantee
 

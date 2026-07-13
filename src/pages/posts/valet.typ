@@ -26,7 +26,7 @@
 
     #btn(
       ([Full report (PDF) ↓], "../docs/valet.pdf"),
-      ([Browse the source ↗], "https://github.com/ldjennings/valet"),
+      ([Explore the codebase ↓], "../docs/valet-code.zip"),
     )
 
     The project doubled as a testbed for two experiments: Python's

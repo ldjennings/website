@@ -36,7 +36,6 @@
       ("valet", up.valet),
       ("wildfire", up.wildfire),
       ("transmission", up.transmission),
-      ("source", "https://github.com/ldjennings/valet"),
     ),
   ),
   (

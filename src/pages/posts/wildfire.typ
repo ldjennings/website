@@ -27,7 +27,10 @@
         lighting new ones. The PRM graph is drawn in the background.],
       alt: "Simulation frame showing a grid field with burning obstacles, a firetruck, the Wumpus, and a roadmap graph of nodes and edges")
 
-    #btn(([Full report (PDF) ↓], "../docs/wildfire.pdf"))
+    #btn(
+      ([Full report (PDF) ↓], "../docs/wildfire.pdf"),
+      ([Explore the codebase ↓], "../docs/wildfire-code.zip"),
+    )
 
     The Ackermann kinematics, Reeds-Shepp trajectory generation, and
     two-phase collision checker carried over from
