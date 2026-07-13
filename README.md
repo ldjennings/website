@@ -64,12 +64,21 @@ figure.
 
 Model files are committed at `src/assets/models/*.glb`, pre-crunched like
 the pre-rendered diagram SVGs so the site build stays hermetic. The
-pipeline for a KiCad board: export STEP or `.pcb3d` → Blender (pcb2blender)
-→ glTF export → `nix shell nixpkgs#meshoptimizer -c gltfpack -i in.glb -o
-out.glb -cc` (quantizes + meshopt-compresses; the radio board went
-10.5 MB → 0.8 MB, visually identical). `-cc` output needs the meshopt
-decoder, which the viewer-scripts block in `skeleton.typ` points at the
-self-hosted copy.
+pipeline for a KiCad board:
+
+```
+kicad-cli pcb export glb -f --subst-models \
+  --include-tracks --include-pads --include-zones \
+  --include-silkscreen --include-soldermask board.kicad_pcb
+nix shell nixpkgs#meshoptimizer -c gltfpack -i board.glb -o out.glb -cc
+```
+
+(the radio board went 15.9 MB → 1.0 MB, visually identical). Component
+colors only survive from STEP/`.stpZ` models — footprints still pointing
+at `.wrl` export as uncolored white shapes, so fix those references (and
+any stale `${KICADn_3DMODEL_DIR}` versions) in the board first. `-cc`
+output needs the meshopt decoder, which the viewer-scripts block in
+`skeleton.typ` points at the self-hosted copy.
 
 The poster doubles as the pre-load frame, so render it from the same
 camera pose the viewer opens with: serve a scratch page with the model at
