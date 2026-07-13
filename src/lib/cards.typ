@@ -16,10 +16,12 @@
 
 // The whole card links to `href` (overlay anchor, m4xc-style); the real
 // links inside sit above it via z-index. The hover preview carries its own
-// full-surface link so the deployed card stays clickable.
+// full-surface link so the deployed card stays clickable. A card standing
+// for several write-ups passes href: none — no card link, navigation
+// happens through the links in its details/preview.
 #let project-card(
   title: [],
-  href: "",
+  href: none,
   thumb: "",
   badge: ("open", "open source"),
   tags: (),
@@ -29,7 +31,7 @@
 ) = html.article(class: "project", {
   html.div(class: "thumb " + thumb)
   html.div(class: "card-body", {
-    html.h3(html.a(href: href, title))
+    html.h3(if href == none { title } else { html.a(href: href, title) })
     html.p(one-liner)
     html.ul(class: "tags", {
       for t in tags { html.li(t) }
@@ -43,9 +45,13 @@
       })
     })
   })
-  html.a(class: "card-link", href: href, aria-hidden: true, tabindex: -1)
+  if href != none {
+    html.a(class: "card-link", href: href, aria-hidden: true, tabindex: -1)
+  }
   html.div(class: "preview", aria-hidden: true, {
-    html.a(class: "preview-link", href: href, aria-hidden: true, tabindex: -1)
+    if href != none {
+      html.a(class: "preview-link", href: href, aria-hidden: true, tabindex: -1)
+    }
     html.div(class: "preview-thumb " + thumb)
     html.div(class: "preview-body", {
       html.h3(title)

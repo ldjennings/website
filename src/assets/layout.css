@@ -402,6 +402,8 @@ h2#writing::before {
   font-size: 1.25rem;
   font-style: italic;
   font-weight: normal;
+  /* On the h3 (not just its anchor) so unlinked card titles match. */
+  color: var(--pine);
 }
 
 .project h3 a {

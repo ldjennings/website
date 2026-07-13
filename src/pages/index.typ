@@ -16,9 +16,10 @@
 )
 
 #let projects = (
+  // No card link: the card stands for three write-ups, linked in its
+  // details/preview.
   (
     title: [motion planning],
-    href: up.valet,
     thumb: "thumb-motion",
     badge: ("study", "coursework"),
     tags: ("python", "planning"),
