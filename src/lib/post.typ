@@ -45,6 +45,46 @@
   }
 }
 
+// Captioned interactive 3D model (assets/models/*.glb), rendered with
+// <model-viewer> — the page must opt in via webpage(viewer: true), which
+// loads the component script. Shows the poster image until tapped; only
+// then does the model download. The poster is also the whole story for
+// paged targets and no-JS readers, so render it from the same `orbit`
+// the viewer starts at (see README, 3D models) or the tap will jump.
+// The interaction hint is appended to the caption on the web only —
+// paged targets get the plain caption with the poster.
+#let fig3d-hint = [ — tap to load the model, then drag to turn it over.]
+#let fig3d(model, poster, caption, alt: "", orbit: auto, width: 75%) = context {
+  if target() == "html" {
+    html.figure(class: "fig-3d", {
+      html.elem(
+        "model-viewer",
+        attrs: (
+          src: "../models/" + model,
+          poster: "../img/" + poster,
+          alt: alt,
+          "camera-controls": "",
+          reveal: "interaction",
+          loading: "lazy",
+          // One-finger drags scroll the page until the reader opts in.
+          "touch-action": "pan-y",
+          // Lighting carried over from the 3d_viewer_test experiments.
+          exposure: "0.8",
+          "environment-image": "neutral",
+          "shadow-intensity": "0.5",
+          "shadow-softness": "1",
+        ) + (if orbit != auto { ("camera-orbit": orbit) } else { (:) }),
+        // Unknown-element fallback: without JS the browser renders this
+        // child; once the component upgrades, its shadow DOM hides it.
+        html.img(src: "../img/" + poster, alt: alt),
+      )
+      html.figcaption(caption + fig3d-hint)
+    })
+  } else {
+    figure(image("../assets/img/" + poster, width: width), caption: caption)
+  }
+}
+
 // Embedded YouTube demo video (HTML pages only; a paged target gets a
 // plain link instead).
 #let video(id, caption) = context {

@@ -27,6 +27,26 @@
         cp ${pkgs.atkinson-hyperlegible-mono}/share/fonts/opentype/AtkinsonHyperlegibleMono-{Regular,Bold}.otf "$out/"
       '';
 
+      # The 3D model viewer (post.typ's fig3d) and the decoder for its
+      # EXT_meshopt_compression models (gltfpack -cc output — see README),
+      # self-hosted next to the pages as js/ so no page touches a CDN.
+      # Pinned like the webfonts: fetched by hash here, never committed.
+      viewerJs = {
+        "model-viewer.min.js" = pkgs.fetchurl {
+          url = "https://cdn.jsdelivr.net/npm/@google/model-viewer@4.3.1/dist/model-viewer.min.js";
+          hash = "sha256-KDsGcjhGFLSEdjbDBvyT/ksfytx21mi05H8Mp2vPAzs=";
+        };
+        "meshopt_decoder.js" = pkgs.fetchurl {
+          url = "https://cdn.jsdelivr.net/npm/meshoptimizer@0.24.0/meshopt_decoder.js";
+          hash = "sha256-xEeVuoxDqJeUMoQX039Lpdqs9Cb2EiT6hBuBgDhojS0=";
+        };
+      };
+      copyViewerJs = dest: pkgs.lib.concatStrings (
+        pkgs.lib.mapAttrsToList (name: file: ''
+          cp -f ${file} "${dest}/${name}"
+        '') viewerJs
+      );
+
       # Only the files the site build needs, copied into the sandbox.
       siteSrc = fs.toSource {
         root = ./src;
@@ -71,8 +91,9 @@
           mkdir -p "$out"
           typst "''${typstArgs[@]}" --features html,bundle "$out/"
           ${pkgs.lib.getExe pkgs.python3} ${./tools/hoist-head.py} "$out"
-          mkdir -p "$out/fonts"
+          mkdir -p "$out/fonts" "$out/js"
           cp ${webFonts}/* "$out/fonts/"
+          ${copyViewerJs "$out/js"}
           runHook postBuild
         '';
       };
@@ -88,8 +109,9 @@
           runtimeInputs = [ site.typst-wrapped ];
           text =
             ''
-              mkdir -p build/fonts
+              mkdir -p build/fonts build/js
               cp -f ${webFonts}/* build/fonts/
+              ${copyViewerJs "build/js"}
             ''
             # watch never exits and rewrites pages on every change, so the
             # head hoist (see buildPhase) can't run here: dev pages keep

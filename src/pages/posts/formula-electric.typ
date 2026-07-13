@@ -1,5 +1,5 @@
 #import "../../lib/skeleton.typ": webpage
-#import "../../lib/post.typ": post, post-pdf, fig, btn, post-nav
+#import "../../lib/post.typ": post, post-pdf, fig, fig3d, btn, post-nav
 
 // One metadata dict feeds the HTML page, its PDF twin, and both titles.
 #let meta = (
@@ -63,8 +63,12 @@
   driver-ground communication. The second revision addressed issues from
   the initial prototype and added an SD card for local data logging.
 
-  #fig("formula_radio_pcb.png", [Driver radio board, rev 2],
-    alt: "Driver radio PCB")
+  // Poster rendered from this orbit — regenerate it if the angle moves
+  // (README, 3D models).
+  #fig3d("radio.glb", "formula_radio_3d_poster.png",
+    [Driver radio board, rev 2],
+    alt: "Interactive 3D model of the driver radio PCB",
+    orbit: "45deg 65deg auto")
 
   = Pedalbox Integration
 
@@ -88,7 +92,7 @@
     boards I made will be used and modified by future team members.]
 ]
 
-#webpage("posts/formula-electric.html", title: meta.title)[
+#webpage("posts/formula-electric.html", title: meta.title, viewer: true)[
   #post(..meta)[
     #body
 

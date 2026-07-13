@@ -39,7 +39,7 @@
   "derain_training.jpg",
   "derain_testing.jpg",
   "formula_inverter_pcb.png",
-  "formula_radio_pcb.png",
+  "formula_radio_3d_poster.png",
   "formula_pedalbox.png",
   "quadrotor_result.png",
   "arm_home_pose.png",
@@ -78,6 +78,13 @@
   "trans_frames.png",
 ) {
   asset("img/" + f, read("assets/img/" + f, encoding: none))
+}
+
+// Interactive 3D models (post.typ's fig3d): meshopt-compressed glTF,
+// produced by the pipeline in README (KiCad → Blender → gltfpack -cc).
+// The viewer scripts themselves are pinned through the flake, not here.
+#for f in ("radio.glb",) {
+  asset("models/" + f, read("assets/models/" + f, encoding: none))
 }
 
 // Report PDFs and code archives referenced by the write-ups.

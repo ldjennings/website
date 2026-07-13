@@ -139,9 +139,15 @@ if (!plausible(apps1, apps2)) {
       from the initial prototype and added an SD card for local data
       logging.</p>
 
-      <figure>
-        <img src="img/formula_radio_pcb.png" alt="Driver radio PCB">
-        <figcaption>Driver radio board, rev 2</figcaption>
+      <!-- 3D model figure: no JS in the mockup, so the unknown
+           <model-viewer> element just renders its fallback img (the
+           poster) — which is exactly the no-JS state of the real page. -->
+      <figure class="fig-3d">
+        <model-viewer poster="img/formula_radio_3d_poster.png">
+          <img src="img/formula_radio_3d_poster.png" alt="Driver radio PCB">
+        </model-viewer>
+        <figcaption>Driver radio board, rev 2 — tap to load the model,
+          then drag to turn it over.</figcaption>
       </figure>
 
       <h2 id="pedalbox-integration">Pedalbox integration</h2>

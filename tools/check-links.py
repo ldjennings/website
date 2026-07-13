@@ -29,7 +29,8 @@ for page, html in pages.items():
     # 404.html is served at arbitrary URLs and carries <base href="/">:
     # its relative links resolve from the bundle root, not its own dir.
     base = root if os.path.basename(page) == "404.html" else os.path.dirname(page)
-    for url in re.findall(r'(?:href|src)="([^"]+)"', html):
+    # poster covers <model-viewer>'s placeholder image attribute.
+    for url in re.findall(r'(?:href|src|poster)="([^"]+)"', html):
         if url.startswith(("http://", "https://", "mailto:", "data:")):
             continue
         parts = urllib.parse.urlsplit(url)

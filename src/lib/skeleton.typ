@@ -193,6 +193,20 @@
   html.a(href: "https://github.com/ldjennings/website", "source")
 }))
 
+// Scripts for pages embedding 3D models (post.typ's fig3d): the config
+// global must exist before the component script reads it — it names the
+// decoder for the meshopt-compressed .glb files, which the component
+// only fetches when a model actually needs it. The module script defers
+// itself; both land in <body> (hoist-head only moves meta/link/base) and
+// nothing on the page depends on them — no-JS readers get fig3d's poster.
+#let viewer-scripts(root) = {
+  html.script(
+    "self.ModelViewerElement = { meshoptDecoderLocation: "
+      + repr(root + "js/meshopt_decoder.js") + " };",
+  )
+  html.script(type: "module", src: root + "js/model-viewer.min.js", "")
+}
+
 // base: set to "/" for pages served at arbitrary URLs (the 404 page) —
 // emits a <base> so every relative href resolves from the site root
 // instead of the requested path (hoist-head.py moves it into <head>).
@@ -200,12 +214,15 @@
 // them, with the headings anchored to match (see the in-page navigation
 // block above); headingless pages are unaffected. toc: false opts out —
 // the index, whose sections nav-main already lists.
-#let webpage(path, title: none, base: none, toc: true, body) = {
+// viewer: opt-in for pages with fig3d models — loads the (self-hosted)
+// model-viewer component; other pages never pay for the script.
+#let webpage(path, title: none, base: none, toc: true, viewer: false, body) = {
   let root = if base == none { "../" * (path.split("/").len() - 1) } else { "" }
   let toc = if toc { toc-group(body) } else { none }
   document(path, title: title, {
     if base != none { html.base(href: base) }
     head-stuff(root)
+    if viewer { viewer-scripts(root) }
     sidebar(root, toc)
     html.div(class: "page", {
       mobile-header(root, toc)

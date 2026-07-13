@@ -32,7 +32,7 @@ stagecraft-themed:
 | --- | --- | --- |
 | Set dressing | `src/lib/dressing.typ` | site name, nav links, logo — what the chrome *says* |
 | Skeleton | `src/lib/skeleton.typ` | `webpage()` wrapper emitting the sidebar / mobile header / colophon around each page |
-| Props | `src/lib/cards.typ`, `src/lib/post.typ` | project cards + article rows for the landing page; the long-form post template (`post()`, `fig()`, `fig-grid()`, `btn()`, `post-nav()`) |
+| Props | `src/lib/cards.typ`, `src/lib/post.typ` | project cards + article rows for the landing page; the long-form post template (`post()`, `fig()`, `fig-grid()`, `fig3d()`, `btn()`, `post-nav()`) |
 | Formatting | `src/assets/layout.css` + `src/assets/theme.css` | structure vs. theme (everforest role variables, light+dark, self-hosted `@font-face`) |
 | Pages | `src/pages/*.typ`, `src/pages/posts/*.typ` | one file per webpage; each calls `webpage(path, title: ..)[content]`. Write-up sources sit in `pages/posts/`, mirroring their `posts/` paths in the bundle — `webpage()` derives the `../` prefix for chrome assets from the path |
 | Staging | `src/main.typ` | `#include`s every page and `#asset`s the shared static files |
@@ -50,6 +50,38 @@ The design itself (layout, theme, decisions log) was settled in
 the nix-pinned font packages (Alegreya, Atkinson Hyperlegible + Mono) into
 `fonts/` by the flake, so visitors get the same faces the flake pins for
 the PDF outputs (future work: subset + woff2-convert them in the build).
+
+### 3D models
+
+Posts can embed interactive 3D models (`fig3d()` in `post.typ`), rendered
+with [`<model-viewer>`](https://modelviewer.dev/) — the only JavaScript on
+the site, self-hosted and nix-pinned by the flake into `js/` (the fonts
+treatment), and loaded only by pages that opt in via
+`webpage(viewer: true)`. Everything degrades: the figure shows a static
+poster image until tapped (the `.glb` downloads nothing before that), no-JS
+readers just get the poster, and the PDF twins typeset it as an ordinary
+figure.
+
+Model files are committed at `src/assets/models/*.glb`, pre-crunched like
+the pre-rendered diagram SVGs so the site build stays hermetic. The
+pipeline for a KiCad board: export STEP or `.pcb3d` → Blender (pcb2blender)
+→ glTF export → `nix shell nixpkgs#meshoptimizer -c gltfpack -i in.glb -o
+out.glb -cc` (quantizes + meshopt-compresses; the radio board went
+10.5 MB → 0.8 MB, visually identical). `-cc` output needs the meshopt
+decoder, which the viewer-scripts block in `skeleton.typ` points at the
+self-hosted copy.
+
+The poster doubles as the pre-load frame, so render it from the same
+camera pose the viewer opens with: serve a scratch page with the model at
+the fig's `camera-orbit`, then
+
+```
+chromium --headless --screenshot=poster.png --window-size=1400,1050 \
+  --default-background-color=00000000 http://localhost:8000/scratch.html
+pngquant --quality 60-90 --strip -o src/assets/img/<name>_poster.png poster.png
+```
+
+(transparent background, so one poster serves both themes).
 
 Cross-page links use ordinary Typst labels: `#webpage(..)[..] <home>` in
 one file, `#link(<home>)[..]` in another — the bundle export rewrites them

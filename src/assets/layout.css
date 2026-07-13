@@ -771,6 +771,27 @@ details.more[open]::details-content {
   background: var(--surface);
 }
 
+/* Interactive 3D figures (post.typ's fig3d): the viewer gets the same
+   framed panel an image would, whether it's showing the poster, the
+   loaded model, or (without JS) the fallback <img> child. height: auto
+   beats the component's :host 150px default so aspect-ratio can bite. */
+.post .fig-3d model-viewer {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--overlay);
+  border-radius: 6px;
+  background: var(--surface);
+  --poster-color: transparent;
+}
+
+/* The fallback <img> child is for no-JS readers only; once the custom
+   element upgrades it would render through the default slot — hide it. */
+.post .fig-3d model-viewer:defined > img {
+  display: none;
+}
+
 /* Multi-image figures: the images share one caption and sit in a grid
    (column count set inline by the fig-grid helper). */
 .post .fig-grid-imgs {

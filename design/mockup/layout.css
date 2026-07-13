@@ -769,6 +769,26 @@ details.more[open]::details-content {
   background: var(--surface);
 }
 
+/* Interactive 3D figures (fig3d in the Typst build): the viewer gets the
+   same framed panel an image would. The mockup only shows the poster
+   state — the real page upgrades <model-viewer> with the component JS.
+   height: auto beats the component's :host 150px default; the :defined
+   rule hides the no-JS fallback <img> once the element upgrades. */
+.post .fig-3d model-viewer {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--overlay);
+  border-radius: 6px;
+  background: var(--surface);
+  --poster-color: transparent;
+}
+
+.post .fig-3d model-viewer:defined > img {
+  display: none;
+}
+
 /* Sub-sections inside a post (e.g. per-report entries). */
 .post h3 {
   font-family: var(--font-display);
