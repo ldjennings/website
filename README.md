@@ -32,7 +32,7 @@ stagecraft-themed:
 | --- | --- | --- |
 | Set dressing | `src/lib/dressing.typ` | site name, nav links, logo — what the chrome *says* |
 | Skeleton | `src/lib/skeleton.typ` | `webpage()` wrapper emitting the sidebar / mobile header / colophon around each page |
-| Props | `src/lib/cards.typ`, `src/lib/post.typ` | project cards + article rows for the landing page; the long-form post template (`post()`, `fig()`, `btn()`, `post-nav()`) |
+| Props | `src/lib/cards.typ`, `src/lib/post.typ` | project cards + article rows for the landing page; the long-form post template (`post()`, `fig()`, `fig-grid()`, `btn()`, `post-nav()`) |
 | Formatting | `src/assets/layout.css` + `src/assets/theme.css` | structure vs. theme (everforest role variables, light+dark, self-hosted `@font-face`) |
 | Pages | `src/pages/*.typ`, `src/pages/posts/*.typ` | one file per webpage; each calls `webpage(path, title: ..)[content]`. Write-up sources sit in `pages/posts/`, mirroring their `posts/` paths in the bundle — `webpage()` derives the `../` prefix for chrome assets from the path |
 | Staging | `src/main.typ` | `#include`s every page and `#asset`s the shared static files |

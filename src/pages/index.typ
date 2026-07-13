@@ -3,7 +3,9 @@
 
 // Write-up pages, all local under posts/.
 #let up = (
-  motion: "posts/motion-planning.html",
+  valet: "posts/valet.html",
+  wildfire: "posts/wildfire.html",
+  transmission: "posts/transmission.html",
   symbotic: "posts/symbotic.html",
   formula: "posts/formula-electric.html",
   quad: "posts/quadrotor.html",
@@ -16,19 +18,25 @@
 #let projects = (
   (
     title: [motion planning],
-    href: up.motion,
+    href: up.valet,
     thumb: "thumb-motion",
     badge: ("study", "coursework"),
     tags: ("python", "planning"),
-    one-liner: [Hybrid A\*, PRM pursuit, and trajectory planning across
-      three graduate projects, each with a full technical report.],
+    one-liner: [Hybrid A\*, PRM pursuit, and BiRRT disassembly across
+      three graduate projects, each with a full write-up and report.],
     blurb: [Three projects from RBE 550 at WPI: Hybrid A\* search for four
       vehicle models — from a holonomic point robot up to a car with
-      trailer — with Reeds-Shepp connections; and a pursuit simulation
+      trailer — with Reeds-Shepp connections; a pursuit simulation
       pitting a grid-based A\* agent against a firetruck planning over a
-      PRM. Reports written to actually explain the algorithms, not just
-      log results.],
-    links: (("write-up", up.motion), ("source", "https://github.com/ldjennings/valet")),
+      PRM; and a BiRRT planner that extracts the mainshaft from a manual
+      transmission. Write-ups that actually explain the algorithms, not
+      just log results.],
+    links: (
+      ("valet", up.valet),
+      ("wildfire", up.wildfire),
+      ("transmission", up.transmission),
+      ("source", "https://github.com/ldjennings/valet"),
+    ),
   ),
   (
     title: [symbotic co-op],
@@ -114,11 +122,25 @@
 
 #let articles = (
   (
-    title: [Hybrid A\* for four vehicle types],
-    href: up.motion,
+    title: [Wildfire: grid A\* vs. PRM in a pursuit game],
+    href: up.wildfire,
+    desc: [An arsonist on a grid races a firetruck on a roadmap — two
+      planners matched to two kinds of kinematics, scored head to head.],
+    date: datetime(year: 2026, month: 5, day: 1),
+  ),
+  (
+    title: [Transmission: pulling a mainshaft with BiRRT],
+    href: up.transmission,
+    desc: [Disassembly planning with a state space built on a formal
+      encapsulation guarantee — and trees that meet over the enclosure.],
+    date: datetime(year: 2026, month: 4, day: 30),
+  ),
+  (
+    title: [Valet: hybrid A\* across four vehicle types],
+    href: up.valet,
     desc: [From a holonomic point robot to a car with a trailer — how the
       same search adapts as the kinematics get harder.],
-    date: datetime(year: 2026, month: 5, day: 1),
+    date: datetime(year: 2026, month: 4, day: 27),
   ),
   (
     title: [Rebuilding a HIL fixture for months-long life testing],

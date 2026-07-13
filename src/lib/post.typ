@@ -19,6 +19,32 @@
   }
 }
 
+// Captioned figure of several images sharing one caption, laid out as a
+// grid ((name, alt) pairs). Same target branching as fig().
+#let fig-grid(images, caption, columns: 2) = context {
+  if target() == "html" {
+    html.figure(class: "fig-grid", {
+      html.div(
+        class: "fig-grid-imgs",
+        style: "grid-template-columns: repeat(" + str(columns) + ", 1fr)",
+        for (name, alt) in images {
+          html.img(src: "../img/" + name, alt: alt)
+        },
+      )
+      html.figcaption(caption)
+    })
+  } else {
+    figure(
+      grid(
+        columns: columns,
+        gutter: 1em,
+        ..images.map(((name, _)) => image("../assets/img/" + name)),
+      ),
+      caption: caption,
+    )
+  }
+}
+
 // Embedded YouTube demo video (HTML pages only; a paged target gets a
 // plain link instead).
 #let video(id, caption) = context {

@@ -769,6 +769,50 @@ details.more[open]::details-content {
   background: var(--surface);
 }
 
+/* Multi-image figures: the images share one caption and sit in a grid
+   (column count set inline by the fig-grid helper). */
+.post .fig-grid-imgs {
+  display: grid;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* Data tables (typst tables export as real <table> markup). */
+.post table {
+  border-collapse: collapse;
+  margin: 1.75rem auto;
+  font-size: 0.9rem;
+}
+
+.post th,
+.post td {
+  text-align: left;
+  padding: 0.35rem 0.9rem;
+}
+
+.post thead th {
+  border-bottom: 1px solid var(--muted);
+}
+
+/* Footnotes (typst exports them as an endnotes section). */
+.post section[role="doc-endnotes"] {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--muted);
+  font-size: 0.85rem;
+  color: var(--subtle);
+}
+
+.post section[role="doc-endnotes"] ol {
+  padding-left: 0;
+}
+
+/* Long display equations scroll instead of overflowing on small screens. */
+.post math[display="block"] {
+  overflow-x: auto;
+  padding: 0.25rem 0;
+}
+
 /* Sub-sections inside a post (e.g. per-report entries). */
 .post h3 {
   font-family: var(--font-display);

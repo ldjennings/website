@@ -12,7 +12,9 @@
 #let nav-main = (
   ("Home", <home>),
   ("Projects", <projects>, (
-    ("Motion planning", <motion-planning>),
+    ("Valet: hybrid A*", <valet>),
+    ("Wildfire pursuit", <wildfire>),
+    ("Transmission removal", <transmission>),
     ("Symbotic co-op", <symbotic>),
     ("Formula electric", <formula-electric>),
     ("Quadrotor interception", <quadrotor>),
@@ -38,7 +40,9 @@
   ("quadrotor", "Quadrotor Interception"),
   ("formula-electric", "Formula Electric"),
   ("symbotic", "Symbotic Co-op"),
-  ("motion-planning", "Motion Planning"),
+  ("valet", "Valet: Hybrid A* Parking"),
+  ("transmission", "Transmission Disassembly"),
+  ("wildfire", "Wildfire: A* vs. PRM"),
 )
 
 // (group title, ((text, dest), ...))

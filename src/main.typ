@@ -11,7 +11,9 @@
 #include "pages/posts/quadrotor.typ"
 #include "pages/posts/formula-electric.typ"
 #include "pages/posts/symbotic.typ"
-#include "pages/posts/motion-planning.typ"
+#include "pages/posts/valet.typ"
+#include "pages/posts/transmission.typ"
+#include "pages/posts/wildfire.typ"
 #include "pages/resume.typ"
 #include "pages/notfound.typ"
 
@@ -44,6 +46,36 @@
   "arm_dims.png",
   "arm_dynamics.png",
   "romi.jpg",
+  "valet_trailer_sim.png",
+  "valet_goal_point.png",
+  "valet_goal_diff.png",
+  "valet_goal_car.png",
+  "valet_goal_trailer.png",
+  "valet_primitives.svg",
+  "valet_grid_spacing.svg",
+  "valet_heading_cache.svg",
+  "valet_aabb_check.svg",
+  "valet_path_overlap.svg",
+  "valet_collision_opt.svg",
+  "valet_smooth_before.png",
+  "valet_smooth_after.png",
+  "valet_nav_point.png",
+  "valet_nav_diff.png",
+  "valet_nav_car.png",
+  "valet_nav_trailer.png",
+  "wildfire_sim.png",
+  "wildfire_states.svg",
+  "wildfire_stuck_start.png",
+  "wildfire_truck_stuck.png",
+  "wildfire_cpu_times.png",
+  "wildfire_trophy.svg",
+  "trans_overview.png",
+  "trans_shaft_full.png",
+  "trans_shaft_simp.png",
+  "trans_spherical.svg",
+  "trans_path.png",
+  "trans_trees.png",
+  "trans_frames.png",
 ) {
   asset("img/" + f, read("assets/img/" + f, encoding: none))
 }
