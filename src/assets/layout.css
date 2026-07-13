@@ -784,6 +784,8 @@ details.more[open]::details-content {
   border-radius: 6px;
   background: var(--surface);
   --poster-color: transparent;
+  /* The loading bar along the viewer's top edge (default near-black). */
+  --progress-bar-color: var(--pine);
 }
 
 /* The fallback <img> child is for no-JS readers only; once the custom

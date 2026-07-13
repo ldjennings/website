@@ -196,13 +196,20 @@
 // Scripts for pages embedding 3D models (post.typ's fig3d): the config
 // global must exist before the component script reads it — it names the
 // decoder for the meshopt-compressed .glb files, which the component
-// only fetches when a model actually needs it. The module script defers
-// itself; both land in <body> (hoist-head only moves meta/link/base) and
-// nothing on the page depends on them — no-JS readers get fig3d's poster.
+// only fetches when a model actually needs it. The click listener is
+// the tap-to-load: model-viewer 4 dropped reveal="interaction", so
+// manual-reveal posters only dismiss through dismissPoster(). The module
+// script defers itself; both land in <body> (hoist-head only moves
+// meta/link/base) and nothing on the page depends on them — no-JS
+// readers get fig3d's poster.
 #let viewer-scripts(root) = {
   html.script(
     "self.ModelViewerElement = { meshoptDecoderLocation: "
-      + repr(root + "js/meshopt_decoder.js") + " };",
+      + repr(root + "js/meshopt_decoder.js") + " };\n"
+      + "document.addEventListener('click', (e) => {\n"
+      + "  const mv = e.target.closest && e.target.closest('model-viewer[reveal=manual]');\n"
+      + "  if (mv && !mv.loaded) mv.dismissPoster();\n"
+      + "});",
   )
   html.script(type: "module", src: root + "js/model-viewer.min.js", "")
 }

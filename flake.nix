@@ -32,9 +32,11 @@
       # self-hosted next to the pages as js/ so no page touches a CDN.
       # Pinned like the webfonts: fetched by hash here, never committed.
       viewerJs = {
+        # 4.2.0, deliberately not latest: the 4.3.x bundles ship leftover
+        # debug console.log spam.
         "model-viewer.min.js" = pkgs.fetchurl {
-          url = "https://cdn.jsdelivr.net/npm/@google/model-viewer@4.3.1/dist/model-viewer.min.js";
-          hash = "sha256-KDsGcjhGFLSEdjbDBvyT/ksfytx21mi05H8Mp2vPAzs=";
+          url = "https://cdn.jsdelivr.net/npm/@google/model-viewer@4.2.0/dist/model-viewer.min.js";
+          hash = "sha256-F9gKt0f1HOAMa47XV4R0Q/nk+6V16+5ZmkIt8wrwn88=";
         };
         "meshopt_decoder.js" = pkgs.fetchurl {
           url = "https://cdn.jsdelivr.net/npm/meshoptimizer@0.24.0/meshopt_decoder.js";

@@ -783,6 +783,8 @@ details.more[open]::details-content {
   border-radius: 6px;
   background: var(--surface);
   --poster-color: transparent;
+  /* The loading bar along the viewer's top edge (default near-black). */
+  --progress-bar-color: var(--pine);
 }
 
 .post .fig-3d model-viewer:defined > img {

@@ -64,12 +64,16 @@
           poster: "../img/" + poster,
           alt: alt,
           "camera-controls": "",
-          reveal: "interaction",
+          // manual + lazy: nothing downloads until dismissPoster(),
+          // which skeleton.typ's delegated click listener calls on tap.
+          reveal: "manual",
           loading: "lazy",
           // One-finger drags scroll the page until the reader opts in.
           "touch-action": "pan-y",
-          // Lighting carried over from the 3d_viewer_test experiments.
-          exposure: "0.8",
+          // Tuned against the 3d_viewer_test three.js reference (neutral
+          // tone mapping, exposure 0.8 × environment intensity 0.7).
+          exposure: "0.55",
+          "tone-mapping": "neutral",
           "environment-image": "neutral",
           "shadow-intensity": "0.5",
           "shadow-softness": "1",
