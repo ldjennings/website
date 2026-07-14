@@ -29,8 +29,12 @@
   throttle and brake pedals, processes them through an STM32
   microcontroller, and communicates with the inverter over CAN bus.
 
-  #fig("formula_inverter_pcb.png", [Inverter controller PCB, rev 1],
-    alt: "Inverter controller PCB")
+  // Poster rendered from this orbit — regenerate it if the angle moves
+  // (README, 3D models).
+  #fig3d("inverter.glb", "formula_inverter_3d_poster.png",
+    [Inverter controller PCB, rev 1],
+    alt: "Interactive 3D model of the inverter controller PCB",
+    orbit: "45deg 65deg auto")
 
   Key features:
 
