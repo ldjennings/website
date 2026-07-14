@@ -82,7 +82,9 @@ output needs the meshopt decoder, which the viewer-scripts block in
 
 The poster doubles as the pre-load frame, so render it from the same
 camera pose the viewer opens with: serve a scratch page with the model at
-the fig's `camera-orbit`, then
+the fig's `camera-orbit` — with `--progress-bar-color: transparent` in
+the page CSS, or the loading bar bakes into the shot as a gray line
+(most visible in the PDF twins) — then
 
 ```
 chromium --headless --screenshot=poster.png --window-size=1400,1050 \
